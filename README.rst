@@ -1,6 +1,8 @@
 gsheets
 =======
 
+|PyPI version| |License| |Supported Python| |Format|
+
 ``gsheets`` is a small wrapper around the `Google Sheets API`_ (v4) to provide
 more convenient access to `Google Sheets`_ from Python scripts.
 
@@ -23,6 +25,8 @@ Links
 
 - GitHub: http://github.com/xflr6/gsheets
 - PyPI: http://pypi.python.org/pypi/gsheets
+- Documentation: http://gsheets.readthedocs.io
+- Changelog: http://gsheets.readthedocs.io/en/latest/changelog.html
 - Issue Tracker: http://github.com/xflr6/gsheets/issues
 - Download: http://pypi.python.org/pypi/gsheets#downloads
 
@@ -174,3 +178,20 @@ This package is distributed under the `MIT license`_.
 
 
 .. |--| unicode:: U+2013
+
+
+.. |PyPI version| image:: https://img.shields.io/pypi/v/gsheets.svg
+    :target: https://pypi.python.org/pypi/gsheets
+    :alt: Latest PyPI Version
+.. |License| image:: https://img.shields.io/pypi/l/gsheets.svg
+    :target: https://pypi.python.org/pypi/gsheets
+    :alt: License
+.. |Supported Python| image:: https://img.shields.io/pypi/pyversions/gsheets.svg
+    :target: https://pypi.python.org/pypi/gsheets
+    :alt: Supported Python Versions
+.. |Format| image:: https://img.shields.io/pypi/format/gsheets.svg
+    :target: https://pypi.python.org/pypi/gsheets
+    :alt: Format
+.. |Downloads| image:: https://img.shields.io/pypi/dm/gsheets.svg
+    :target: https://pypi.python.org/pypi/gsheets
+    :alt: Downloads
