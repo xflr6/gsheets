@@ -43,3 +43,10 @@ WorkSheet
         spreadsheet,
         id, title, url, index ,nrows, ncols, ncells,
         to_csv, to_frame
+
+
+Low-level functions
+-------------------
+
+.. autofunction:: gsheets.get_credentials
+.. autofunction:: gsheets.build_service

@@ -5,7 +5,7 @@ Changelog
 Version 0.1.1 (in development)
 ------------------------------
 
-
+Include get_credentials and build_service as low-level api functions
 
 
 Version 0.1
