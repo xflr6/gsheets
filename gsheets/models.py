@@ -3,11 +3,9 @@
 """Python objects for spreadsheets consisting of worksheets."""
 
 from . import backend, urls, coordinates, export, tools
-from ._compat import map, zip
+from ._compat import string_types, map, zip
 
 __all__ = ['SpreadSheet', 'SheetsView', 'WorkSheet']
-
-# TODO: equivalence
 
 
 class SpreadSheet(object):
@@ -36,6 +34,16 @@ class SpreadSheet(object):
     def __repr__(self):
         return '<%s %s %r>' % (self.__class__.__name__,
             self._url.short_id, self._title)
+
+    def __eq__(self, other):
+        if isinstance(other, SpreadSheet):
+            return self.sheets == other.sheets
+        return NotImplemented
+
+    def __ne__(self, other):
+        if isinstance(other, SpreadSheet):
+            return self.sheets != other.sheets
+        return NotImplemented
 
     def __len__(self):
         """Return the number of contained worksheets.
@@ -150,17 +158,24 @@ class SpreadSheet(object):
         """The first worksheet of the spreadsheet."""
         return self._sheets[0]
 
-    @tools.doctemplate(export.MAKE_FILENAME.source)
     def to_csv(self, encoding=export.ENCODING, dialect=export.DIALECT,
-               make_filename=None):
+               make_filename=export.MAKE_FILENAME):
         """Dump all worksheets of the spreadsheet to individual CSV files.
 
         Args:
             encoding (str): result string encoding
             dialect (str): :mod:`csv` dialect name or object to use
-            make_filename: three-argument callable returning the filename
+            make_filename: template or one-argument callable returning the filename
 
-        The default make_filename is `%s`
+        If ``make_filename`` is a string, it is string-interpolated with an
+        infos-dictionary with the fields ``id`` (spreadhseet id), ``title``
+        (spreadsheet title), ``sheet`` (worksheet title), ``gid`` (worksheet
+        id), ``index`` (worksheet index), and ``dialect`` CSV dialect to
+        generate the filename: ``filename = make_filename % infos``.
+
+        If ``make_filename`` is a callable, it will be called with the
+        infos-dictionary to generate the filename:
+        ``filename = make_filename(infos)``.
         """
         for s in self._sheets:
             s.to_csv(None, encoding, dialect, make_filename)
@@ -168,6 +183,18 @@ class SpreadSheet(object):
 
 class SheetsView(tools.list_view):
     """Read-only view on the list of worksheets in a spreadsheet."""
+
+    def __eq__(self, other):
+        if isinstance(other, SheetsView):
+            return (self.titles() == other.titles()
+                and all(s == o for s, o in zip(self._items, other._items)))
+        return NotImplemented
+
+    def __ne__(self, other):
+        if isinstance(other, SheetsView):
+            return (self.titles() != other.titles()
+                or any(s != o for s, o in zip(self._items, other._items)))
+        return NotImplemented        
 
     def __getitem__(self, index):
         """Return the worksheet at the given index (position).
@@ -221,6 +248,16 @@ class WorkSheet(object):
     def __repr__(self):
         return '<%s %d %r (%dx%d)>' % (self.__class__.__name__,
             self._id, self._title, self.nrows, self.ncols)
+
+    def __eq__(self, other):
+        if isinstance(other, WorkSheet):
+            return self._values == other._values
+        return NotImplemented
+
+    def __ne__(self, other):
+        if isinstance(other, WorkSheet):
+            return self._values != other._values
+        return NotImplemented
 
     def __getitem__(self, index):
         """Return the value(s) of the given cell(s).
@@ -304,26 +341,42 @@ class WorkSheet(object):
         """Number of cells in the worksheet (int)."""
         return self.nrows * self.ncols
 
-    @tools.doctemplate(export.MAKE_FILENAME.source)
     def to_csv(self, filename=None,
                encoding=export.ENCODING, dialect=export.DIALECT,
-               make_filename=None):
+               make_filename=export.MAKE_FILENAME):
         """Dump the worksheet to a CSV file.
 
         Args:
             filename (str): result filename (if None use make_filename)
             encoding (str): result string encoding
             dialect (str): :mod:`csv` dialect name or object to use
-            make_filename: three-argument callable returning the filename
+            make_filename: template or one-argument callable returning the filename
 
-        The default make_filename is `%s`
+        If ``make_filename`` is a string, it is string-interpolated with an
+        infos-dictionary with the fields ``id`` (spreadhseet id), ``title``
+        (spreadsheet title), ``sheet`` (worksheet title), ``gid`` (worksheet
+        id), ``index`` (worksheet index), and ``dialect`` CSV dialect to
+        generate the filename: ``filename = make_filename % infos``.
+
+        If ``make_filename`` is a callable, it will be called with the
+        infos-dictionary to generate the filename:
+        ``filename = make_filename(infos)``.
         """
         if filename is None:
             if make_filename is None:
                 make_filename = export.MAKE_FILENAME
-            title = self._spreadsheet._title
-            sheet = self._title
-            filename = make_filename(title, sheet, dialect)
+            infos = {
+                'id': self._spreadsheet._id,
+                'title': self._spreadsheet._title,
+                'sheet': self._title,
+                'gid': self._id,
+                'index': self._index,
+                'dialect': dialect,
+            }
+            if isinstance(make_filename, string_types):
+                filename = make_filename % infos
+            else:
+                filename = make_filename(infos)
         with export.open_csv(filename, 'w', encoding=encoding) as fd:
             export.write_csv(fd, self._values, encoding, dialect)
 

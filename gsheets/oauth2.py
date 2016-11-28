@@ -28,7 +28,7 @@ def get_credentials(scopes=None, secrets=None, storage=None):
         secrets: Location of secrets file (default: %r).
         storage: Location of storage file (default: %r).
 
-    http://developers.google.com/sheets/quickstart/python
+    see http://developers.google.com/sheets/quickstart/python
     """
     scopes = Scopes.get(scopes)
 
@@ -52,7 +52,7 @@ def get_credentials(scopes=None, secrets=None, storage=None):
 class Scopes(object):
     """URLs for read or read/write access to Google sheets and drive.
 
-    http://developers.google.com/sheets/guides/authorizing
+    see http://developers.google.com/sheets/guides/authorizing
 
     >>> Scopes.get('read')  # doctest: +NORMALIZE_WHITESPACE
     ('https://www.googleapis.com/auth/spreadsheets.readonly',

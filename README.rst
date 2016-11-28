@@ -1,7 +1,7 @@
 gsheets
 =======
 
-|PyPI version| |License| |Supported Python| |Format|
+|PyPI version| |License| |Supported Python| |Format| |Docs|
 
 ``gsheets`` is a small wrapper around the `Google Sheets API`_ (v4) to provide
 more convenient access to `Google Sheets`_ from Python scripts.
@@ -23,12 +23,12 @@ method. Create pandas DataFrames from worksheet with the ``to_frame`` method.
 Links
 -----
 
-- GitHub: http://github.com/xflr6/gsheets
-- PyPI: http://pypi.python.org/pypi/gsheets
-- Documentation: http://gsheets.readthedocs.io
-- Changelog: http://gsheets.readthedocs.io/en/latest/changelog.html
-- Issue Tracker: http://github.com/xflr6/gsheets/issues
-- Download: http://pypi.python.org/pypi/gsheets#downloads
+- GitHub: https://github.com/xflr6/gsheets
+- PyPI: https://pypi.python.org/pypi/gsheets
+- Documentation: https://gsheets.readthedocs.io
+- Changelog: https://gsheets.readthedocs.io/en/latest/changelog.html
+- Issue Tracker: https://github.com/xflr6/gsheets/issues
+- Download: https://pypi.python.org/pypi/gsheets#downloads
 
 
 Installation
@@ -143,7 +143,7 @@ See also
 - df2gspread_ |--| Transfer data between Google Spreadsheets and Pandas (build
   upon gspread_, currently Python 2 only, GPL)
 - pygsheets_ |--| Google Spreadsheets Python API v4 (v4 port of gspread_
-  providing further extensions)
+  providing further extensions, currently Python 2 only?)
 - pgsheets_ |--| Manipulate Google Sheets Using Pandas DataFrames (independent
   bidirectional transfer library, using the `legacy v3 API`_, Python 3 only)
 
@@ -195,3 +195,6 @@ This package is distributed under the `MIT license`_.
 .. |Downloads| image:: https://img.shields.io/pypi/dm/gsheets.svg
     :target: https://pypi.python.org/pypi/gsheets
     :alt: Downloads
+.. |Docs| image:: https://readthedocs.org/projects/pip/badge/?version=latest
+    :target: https://gsheets.readthedocs.io/en/latest/
+    :alt: Readthedocs

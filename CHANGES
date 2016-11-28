@@ -5,6 +5,12 @@ Changelog
 Version 0.1.1 (in development)
 ------------------------------
 
+Also support template strings for make_filename.
+
+Change make_filename callable to a one argument functon giving a dictionary.
+
+Add equivalence for SpreadSheet, SheetsView, and WorkSheet.
+
 Include get_credentials and build_service as low-level api functions
 
 

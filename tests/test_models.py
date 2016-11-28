@@ -35,6 +35,18 @@ class TestSpreadSheet(object):
     def test_repr(self, sheet):
         assert repr(sheet) == "<SpreadSheet spam 'Spam'>"
 
+    def test_eq(self, sheet):
+        assert sheet == sheet
+
+    def test_eq_fail(self, sheet):
+        assert not sheet == object()
+
+    def test_ne(self, sheet):
+        assert sheet != object()
+
+    def test_ne_fail(self, sheet):
+        assert not sheet != sheet
+
     def test_len(self, sheet):
         assert len(sheet) == 1
 
@@ -110,6 +122,12 @@ class TestSpreadSheet(object):
 
 class TestSheetsView(object):
 
+    def test_eq_fail(self, view):
+        assert not view == list(view)
+
+    def test_ne_fail(self, view):
+        assert view != list(view)
+
     def test_getitem(self, view):
         assert view[0].id == 0
 
@@ -131,6 +149,12 @@ class TestWorkSheet(object):
 
     def test_repr(self, ws):
         assert repr(ws) == "<WorkSheet 0 'Spam1' (2x2)>"
+
+    def test_eq_fail(self, ws):
+        assert not ws == ws.values()
+
+    def test_ne_fail(self, ws):
+        assert ws != ws.values()
 
     def test_getitem(self, ws):
         assert ws[:] == [[1, 2], [3, 4]]
@@ -185,16 +209,21 @@ class TestWorkSheet(object):
     def test_to_csv(self, ws):
         self._to_csv(ws)
 
+    def test_to_csv_func(self, ws):
+        make_filename = lambda infos: '%(title)s-%(index)s-%(sheet)s.csv' % infos
+        self._to_csv(ws, make_filename=make_filename, filename='Spam-0-Spam1.csv')
+
     def test_to_csv_nonascii(self, ws_nonascii):
         if PY2:
-            self._to_csv(ws_nonascii, ['Sp\xc3\xa4m,Eggs\r\n', ',1\r\n'])
+            self._to_csv(ws_nonascii, lines=['Sp\xc3\xa4m,Eggs\r\n', ',1\r\n'])
         else:
-            self._to_csv(ws_nonascii, [u'Sp\xe4m,Eggs\r\n', u',1\r\n'])
+            self._to_csv(ws_nonascii, lines=[u'Sp\xe4m,Eggs\r\n', u',1\r\n'])
 
     @staticmethod
-    def _to_csv(obj, lines=['1,2\r\n', '3,4\r\n'], filename='Spam - Spam1.csv', encoding='utf-8'):
+    def _to_csv(obj, make_filename=None, lines=['1,2\r\n', '3,4\r\n'],
+                filename='Spam - Spam1.csv', encoding='utf-8'):
         with mock.patch('gsheets._compat.open', mock.mock_open()) as open:
-            obj.to_csv()
+            obj.to_csv(make_filename=make_filename)
         if PY2:
             open.assert_called_once_with(filename, 'wb')
         else:

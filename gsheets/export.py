@@ -4,7 +4,6 @@
 
 import csv
 import contextlib
-from . import tools
 
 from ._compat import open_csv, csv_writerows, CsvBuffer, read_csv
 
@@ -16,8 +15,7 @@ ENCODING = 'utf-8'
 
 DIALECT = 'excel'
 
-MAKE_FILENAME = tools.eval_source(
-    "lambda title, sheet, dialect: '%s - %s.csv' % (title, sheet)")
+MAKE_FILENAME = '%(title)s - %(sheet)s.csv'
 
 
 def write_csv(fileobj, rows, encoding=ENCODING, dialect=DIALECT):
