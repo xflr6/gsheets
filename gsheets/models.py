@@ -133,6 +133,12 @@ class SpreadSheet(object):
             return []
         return list(self._titles[title])
 
+    def values(self, a1_notation):
+        """
+
+        see https://developers.google.com/sheets/guides/concepts#a1_notation
+        """
+
     @property
     def sheets(self):
         """List view of the worksheets in the spreadsheet (positional access). """
@@ -140,7 +146,10 @@ class SpreadSheet(object):
 
     @property
     def id(self):
-        """Unique alphanumeric id of the spreadsheet (str)."""
+        """Unique alphanumeric id of the spreadsheet (str).
+
+        see https://developers.google.com/sheets/guides/concepts#spreadsheet_id
+        """
         return self._id
 
     @property
@@ -308,7 +317,10 @@ class WorkSheet(object):
 
     @property
     def id(self):
-        """Stable numeric worksheet id (int), unique within its spreadsheet."""
+        """Stable numeric worksheet id (int), unique within its spreadsheet.
+
+        see https://developers.google.com/sheets/guides/concepts#sheet_id
+        """
         return self._id
 
     @property

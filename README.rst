@@ -143,7 +143,7 @@ See also
 - df2gspread_ |--| Transfer data between Google Spreadsheets and Pandas (build
   upon gspread_, currently Python 2 only, GPL)
 - pygsheets_ |--| Google Spreadsheets Python API v4 (v4 port of gspread_
-  providing further extensions, currently Python 2 only?)
+  providing further extensions)
 - pgsheets_ |--| Manipulate Google Sheets Using Pandas DataFrames (independent
   bidirectional transfer library, using the `legacy v3 API`_, Python 3 only)
 

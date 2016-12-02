@@ -14,17 +14,18 @@ class Sheets(object):
 
     @classmethod
     @tools.doctemplate(oauth2.SECRETS, oauth2.STORAGE, oauth2.SCOPES)
-    def from_files(cls, secrets=None, storage=None, scopes=None):
+    def from_files(cls, secrets=None, storage=None, scopes=None, no_webserver=False):
         """Return a spreadsheet collection making OAauth 2.0 credentials.
 
         Args:
             secrets (str): location of secrets file (default: %r)
             storage (str): location of storage file (default: %r)
             scopes: scope URL(s) or 'read' or 'write' (default: %r)
+            no_webserver (bool): URL/code prompt instead of webbrowser auth
         Returns:
             Sheets: new Sheets instance with OAauth 2.0 credentials
         """
-        creds = oauth2.get_credentials(scopes, secrets, storage)
+        creds = oauth2.get_credentials(scopes, secrets, storage, no_webserver)
         return cls(creds)
 
     def __init__(self, credentials):

@@ -11,7 +11,9 @@ Change make_filename callable to a one argument functon giving a dictionary.
 
 Add equivalence for SpreadSheet, SheetsView, and WorkSheet.
 
-Include get_credentials and build_service as low-level api functions
+Include get_credentials and build_service as low-level api functions.
+
+Add no_webserver auth for working on remote machines.
 
 
 Version 0.1

@@ -3,6 +3,7 @@
 """Helpers for doing OAuth 2.0 authentification."""
 
 import os
+import argparse
 
 from oauth2client import file, client, tools
 
@@ -20,13 +21,14 @@ STORAGE = '~/storage.json'
 
 
 @doctemplate(SCOPES, SECRETS, STORAGE)
-def get_credentials(scopes=None, secrets=None, storage=None):
+def get_credentials(scopes=None, secrets=None, storage=None, no_webserver=False):
     """Make OAuth 2.0 credentials for scopes from secrets and storage files.
 
     Args:
-        scopes: Scope URL(s) or 'read', 'write' (default: %r).
-        secrets: Location of secrets file (default: %r).
-        storage: Location of storage file (default: %r).
+        scopes: scope URL(s) or 'read', 'write' (default: %r)
+        secrets: location of secrets file (default: %r)
+        storage: location of storage file (default: %r)
+        no_webserver: url/code prompt instead of webbrowser based auth
 
     see http://developers.google.com/sheets/quickstart/python
     """
@@ -43,8 +45,11 @@ def get_credentials(scopes=None, secrets=None, storage=None):
     creds = store.get()
 
     if creds is None or creds.invalid:
+        parser = argparse.ArgumentParser(parents=[tools.argparser])
+        args = ['--noauth_local_webserver'] if no_webserver else []
+        flags = parser.parse_args(args)
         flow = client.flow_from_clientsecrets(secrets, scopes)
-        creds = tools.run_flow(flow, store)
+        creds = tools.run_flow(flow, store, flags)
 
     return creds
 

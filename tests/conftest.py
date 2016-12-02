@@ -21,7 +21,8 @@ SPREADSHEET = {
 def oauth2():
     with mock.patch('gsheets.oauth2.file') as file,\
          mock.patch('gsheets.oauth2.client') as client,\
-         mock.patch('gsheets.oauth2.tools') as tools:
+         mock.patch('gsheets.oauth2.tools') as tools,\
+         mock.patch('gsheets.oauth2.argparse') as argparse:
         yield type('oauth2', (object,), locals())
 
 
