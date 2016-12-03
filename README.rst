@@ -195,6 +195,6 @@ This package is distributed under the `MIT license`_.
 .. |Downloads| image:: https://img.shields.io/pypi/dm/gsheets.svg
     :target: https://pypi.python.org/pypi/gsheets
     :alt: Downloads
-.. |Docs| image:: https://readthedocs.org/projects/pip/badge/?version=latest
+.. |Docs| image:: https://readthedocs.org/projects/gsheets/badge/?version=latest
     :target: https://gsheets.readthedocs.io/en/latest/
     :alt: Readthedocs
