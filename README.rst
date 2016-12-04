@@ -54,8 +54,8 @@ spreadsheets you want to access. Create (or select) a project and enable the
 Go to the **Credentials** for your project and create **New credentials** >
 **OAuth client ID** > of type **Other**. In the list of your **OAuth 2.0 client
 IDs** click **Download JSON** for the Client ID you just created. Save the
-file as ``client_id.json`` in your home directory (user directory). Another
-file, named ``storage.json`` in this example, will be created after
+file as ``client_secrets.json`` in your home directory (user directory).
+Another file, named ``storage.json`` in this example, will be created after
 successful authorization to cache OAuth data.
 
 On you first usage of ``gsheets`` with this file (holding the client secrets),
@@ -69,7 +69,7 @@ Create a sheets object:
 
     >>> from gsheets import Sheets
 
-    >>> sheets = Sheets.from_files('~/client_id.json', '~/storage.json')
+    >>> sheets = Sheets.from_files('~/client_secrets.json', '~/storage.json')
     >>> sheets  #doctest: +ELLIPSIS
     <gsheets.api.Sheets object at 0x...>
 
@@ -146,6 +146,8 @@ See also
   providing further extensions)
 - pgsheets_ |--| Manipulate Google Sheets Using Pandas DataFrames (independent
   bidirectional transfer library, using the `legacy v3 API`_, Python 3 only)
+- PyDrive_ |--| Google Drive API made easy (google-api-python-client_ wrapper
+  for the `Google Drive`_ API, currently v2) 
 
 
 License
@@ -156,6 +158,7 @@ This package is distributed under the `MIT license`_.
 
 .. _Google Sheets API: https://developers.google.com/sheets/
 .. _Google Sheets: https://sheets.google.com
+.. _Google Drive: https://drive.google.com
 .. _Turn on the API: https://developers.google.com/sheets/quickstart/python#step_1_turn_on_the_api_name
 
 .. _pip: https://pip.readthedocs.io
@@ -173,6 +176,7 @@ This package is distributed under the `MIT license`_.
 .. _df2gspread: https://pypi.python.org/pypi/df2gspread
 .. _pygsheets : https://pypi.python.org/pypi/pygsheets
 .. _pgsheets: https://pypi.python.org/pypi/pgsheets
+.. _PyDrive: https://pypi.python.org/pypi/PyDrive
 
 .. _MIT license: https://opensource.org/licenses/MIT
 

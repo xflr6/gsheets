@@ -15,7 +15,7 @@ __all__ = ['get_credentials']
 
 SCOPES = 'read'
 
-SECRETS = '~/client_id.json'
+SECRETS = '~/client_secrets.json'
 
 STORAGE = '~/storage.json'
 
@@ -31,6 +31,7 @@ def get_credentials(scopes=None, secrets=None, storage=None, no_webserver=False)
         no_webserver: url/code prompt instead of webbrowser based auth
 
     see http://developers.google.com/sheets/quickstart/python
+    see https://developers.google.com/api-client-library/python/guide/aaa_client_secrets
     """
     scopes = Scopes.get(scopes)
 
