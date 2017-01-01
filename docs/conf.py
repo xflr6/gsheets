@@ -54,7 +54,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'gsheets'
-copyright = u'2016, Sebastian Bank'
+copyright = u'2016-2017, Sebastian Bank'
 author = u'Sebastian Bank'
 
 # The version info for the project you're documenting, acts as replacement for
