@@ -1,5 +1,5 @@
 # exact (transitive) dependency versions used in development
-google-api-python-client==1.5.5
+google-api-python-client==1.6
 httplib2==0.9.2
 uritemplate==3.0.0
 six==1.10.0
