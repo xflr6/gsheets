@@ -3,7 +3,6 @@
 """Helpers for doing OAuth 2.0 authentification."""
 
 import os
-import argparse
 
 from oauth2client import file, client, tools
 
@@ -46,9 +45,8 @@ def get_credentials(scopes=None, secrets=None, storage=None, no_webserver=False)
     creds = store.get()
 
     if creds is None or creds.invalid:
-        parser = argparse.ArgumentParser(parents=[tools.argparser])
         args = ['--noauth_local_webserver'] if no_webserver else []
-        flags = parser.parse_args(args)
+        flags = tools.argparser.parse_args(args)
         flow = client.flow_from_clientsecrets(secrets, scopes)
         creds = tools.run_flow(flow, store, flags)
 

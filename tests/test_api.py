@@ -18,7 +18,7 @@ class TestSheets(object):
         oauth2.client.flow_from_clientsecrets.assert_called_once()
         oauth2.tools.run_flow.assert_called_once_with(
             oauth2.client.flow_from_clientsecrets(), oauth2.file.Storage(),
-            oauth2.argparse.ArgumentParser().parse_args())
+            oauth2.tools.argparser.parse_args())
         assert isinstance(sheets, gsheets.Sheets)
         assert sheets._creds is oauth2.tools.run_flow.return_value
 
