@@ -105,6 +105,16 @@ class Coordinates(object):
 
     @staticmethod
     def _cint(col, _map={base26(i): i - 1 for i in range(1, 257)}):
+        """Return zero-based column index from bijective base26 string.
+
+        >>> Coordinates._cint('Ab')
+        27
+
+        >>> Coordinates._cint('spam')
+        Traceback (most recent call last):
+            ...
+        ValueError: spam
+        """
         try:
             return _map[col.upper()]
         except KeyError:
@@ -293,12 +303,10 @@ class DoubleSlice(Slice):
         if sxcol is not None:
             if xcol is not None:
                 sxcol, sxrow, xcol, xrow = cls._cint(sxcol), cls._rint(sxrow), cls._cint(xcol), cls._rint(xrow)
-                if (sxcol, sxrow) == (xcol, xrow):
-                    return Cell(sxcol, sxrow)
+                if (sxcol, sxrow) == (xcol, xrow) or sxrow == xrow:
+                    return StartCellStopCol(sxcol, sxrow, xcol + 1)
                 elif sxcol == xcol:
                     return StartCellStopRow(sxcol, sxrow, xrow + 1)
-                elif sxrow == xrow:
-                    return StartCellStopCol(sxcol, sxrow, xcol + 1)
                 elif sxcol > xcol or sxrow > xrow:
                     return Empty()
                 return StartCellStopCell(sxcol, sxrow, xcol + 1, xrow + 1)
@@ -345,7 +353,7 @@ class StartCellStopCell(DoubleSlice):
     (<StartCellStopCell(col=slice(0, 2, None), row=slice(0, 2, None))>, [[1, 2], [4, 5]])
 
     >>> Cells()['A1':'A1']
-    (<Cell(col=0, row=0)>, 1)
+    (<StartCellStopCol(col=slice(0, 1, None), row=0)>, [1])
 
     >>> Cells()['A1':'C1']
     (<StartCellStopCol(col=slice(0, 3, None), row=0)>, [1, 2, 3])
