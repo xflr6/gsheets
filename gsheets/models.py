@@ -203,7 +203,7 @@ class SheetsView(tools.list_view):
         if isinstance(other, SheetsView):
             return (self.titles() != other.titles()
                 or any(s != o for s, o in zip(self._items, other._items)))
-        return NotImplemented        
+        return NotImplemented
 
     def __getitem__(self, index):
         """Return the worksheet at the given index (position).

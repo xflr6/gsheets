@@ -311,12 +311,32 @@ class DoubleSlice(Slice):
                     return Empty()
                 return StartCellStopCell(sxcol, sxrow, xcol + 1, xrow + 1)
             elif col is not None:
-                return StartCellStopCol(cls._cint(sxcol), cls._rint(sxrow), cls._cint(col) + 1)
-            return StartCellStopRow(cls._cint(sxcol), cls._rint(sxrow), cls._rint(row) + 1)
+                sxcol, sxrow, col = cls._cint(sxcol), cls._rint(sxrow), cls._cint(col)
+                if sxcol == col:
+                    return StartCellStopRow(sxcol, sxrow, None)
+                elif sxcol > col:
+                    return Empty()
+                return StartCellStopCol(sxcol, sxrow, col + 1)
+            sxcol, sxrow, row = cls._cint(sxcol), cls._rint(sxrow), cls._rint(row)
+            if sxrow == row:
+                return StartCellStopCol(sxcol, sxrow, None)
+            elif sxrow > row:
+                return Empty()
+            return StartCellStopRow(sxcol, sxrow, row + 1)
         elif xcol is not None:
             if scol is not None:
-                return StartColStopCell(cls._cint(scol), cls._cint(xcol) + 1, cls._rint(xrow))
-            return StartRowStopCell(cls._rint(srow), cls._cint(xcol), cls._rint(xrow) + 1)
+                scol, xcol, xrow = cls._cint(scol), cls._cint(xcol), cls._rint(xrow)
+                if scol == xcol:
+                    return StartRowStopCell(None, xcol, xrow + 1)
+                elif scol > xcol:
+                    return Empty()
+                return StartColStopCell(scol, xcol + 1, xrow)
+            srow, xcol, xrow = cls._rint(srow), cls._cint(xcol), cls._rint(xrow)
+            if srow == xrow:
+                return StartColStopCell(None, xcol + 1, xrow)
+            elif srow > xrow:
+                return Empty()
+            return StartRowStopCell(srow, xcol, xrow + 1)
         elif scol is not None and col is not None:
             scol, col = cls._cint(scol), cls._cint(col)
             if scol == col:
@@ -372,9 +392,15 @@ class StartCellStopCell(DoubleSlice):
 
 class StartCellStopCol(Cell, DoubleSlice):
     """
-    
+
     >>> Cells()['A1':'C']
     (<StartCellStopCol(col=slice(0, 3, None), row=0)>, [1, 2, 3])
+
+    >>> Cells()['A1':'A']
+    (<StartCellStopRow(col=0, row=slice(0, None, None))>, [1, 4, 7])
+
+    >>> Cells()['B3':'A']
+    (<Empty()>, [])
     """
 
     def __init__(self, start_col, start_row, stop_col):
@@ -387,6 +413,12 @@ class StartCellStopRow(DoubleSlice):
 
     >>> Cells()['A1':'3']
     (<StartCellStopRow(col=0, row=slice(0, 3, None))>, [1, 4, 7])
+
+    >>> Cells()['A1':'1']
+    (<StartCellStopCol(col=slice(0, None, None), row=0)>, [1, 2, 3])
+
+    >>> Cells()['B3':'1']
+    (<Empty()>, [])
     """
     def __init__(self, start_col, start_row, stop_row):
         self.col = start_col
@@ -398,6 +430,12 @@ class StartColStopCell(Cell, DoubleSlice):
 
     >>> Cells()['A':'C1']
     (<StartColStopCell(col=slice(0, 3, None), row=0)>, [1, 2, 3])
+
+    >>> Cells()['C':'C3']
+    (<StartRowStopCell(col=2, row=slice(None, 3, None))>, [3, 6, 9])
+
+    >>> Cells()['B':'A1']
+    (<Empty()>, [])
     """
 
     def __init__(self, start_col, stop_col, stop_row):
@@ -410,6 +448,12 @@ class StartRowStopCell(DoubleSlice):
 
     >>> Cells()['1':'A3']
     (<StartRowStopCell(col=0, row=slice(0, 3, None))>, [1, 4, 7])
+
+    >>> Cells()['3':'C3']
+    (<StartColStopCell(col=slice(None, 3, None), row=2)>, [7, 8, 9])
+
+    >>> Cells()['3':'A1']
+    (<Empty()>, [])
     """
     def __init__(self, start_row, stop_col, stop_row):
         self.col = stop_col
