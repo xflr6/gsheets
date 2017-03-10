@@ -2,8 +2,10 @@ Changelog
 =========
 
 
-Version 0.1.1 (in development)
-------------------------------
+Version 0.2 (in development)
+----------------------------
+
+Make a1 notation slices inclusive (backwards incompatible).
 
 Also support template strings for make_filename.
 
