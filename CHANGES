@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-Version 0.2 (in development)
-----------------------------
+Version 0.2
+-----------
 
 Make a1 notation slices inclusive (backwards incompatible).
 
@@ -18,6 +18,8 @@ Include get_credentials and build_service as low-level api functions.
 Add no_webserver auth for working on remote machines.
 
 Change default filename for client secrets to client_secrets.json.
+
+Include docs in source distribution.
 
 
 Version 0.1
