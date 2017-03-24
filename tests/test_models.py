@@ -245,7 +245,7 @@ class TestWorkSheet(object):
             if PY2:
                 assert encoding == 'utf-8' and dialect == 'excel'
             else:
-                assert encoding == None and dialect == 'excel'
+                assert encoding is None and dialect == 'excel'
             assert fd.getvalue() == data
             return mock.NonCallableMock()
         with mock.patch('gsheets.export.pandas') as pandas:

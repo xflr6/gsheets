@@ -55,7 +55,7 @@ class Sheets(object):
         Yields:
             new SpreadSheet spreadsheet instances
         """
-        return (self[id] for id, title in backend.iterfiles(self._drive))
+        return (self[id] for id, _ in backend.iterfiles(self._drive))
 
     def __contains__(self, id):
         """Return if there is a spreadsheet with the given id.
@@ -120,7 +120,7 @@ class Sheets(object):
         """
         files = backend.iterfiles(self._drive, name=title)
         try:
-            return next(self[id] for id, name in files)
+            return next(self[id] for id, _ in files)
         except StopIteration:
             raise KeyError(title)
 
@@ -135,7 +135,7 @@ class Sheets(object):
         if title is None:
             return list(self)
         files = backend.iterfiles(self._drive, name=title)
-        return [self[id] for id, name in files]
+        return [self[id] for id, _ in files]
 
     def iterfiles(self):
         """Yield (id, title) pairs for all available spreadsheets.
@@ -151,7 +151,7 @@ class Sheets(object):
         Returns:
             list: list of unique alphanumeric id strings
         """
-        return [id for id, name in self.iterfiles()]
+        return [id for id, _ in self.iterfiles()]
 
     def titles(self, unique=False):
         """Return a list of all available spreadsheet titles.
@@ -162,5 +162,5 @@ class Sheets(object):
             list: list of title/name strings
         """
         if unique:
-            return tools.uniqued(title for id, title in self.iterfiles())
-        return [title for id, title in self.iterfiles()]
+            return tools.uniqued(title for _, title in self.iterfiles())
+        return [title for _, title in self.iterfiles()]
