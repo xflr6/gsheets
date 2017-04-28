@@ -18,6 +18,7 @@ if PY2:  # pragma: no cover
             mode = ''
         if 'b' not in mode:
             mode += 'b'
+        # encoding handled by csv_writewors
         return open(name, mode)
 
     def csv_writerows(csvfile, rows, encoding):
@@ -46,9 +47,13 @@ else:  # pragma: no cover
         return open(name, mode, encoding=encoding, newline='')
 
     def csv_writerows(csvfile, rows, encoding):
+        # encoding handled by open_csv
+        assert encoding == csvfile.encoding
         csvfile.writerows(rows)
 
     from io import StringIO as CsvBuffer
 
     def read_csv(pandas, fd, encoding, dialect, kwargs):
+        # encoding handled by open_csv
+        assert encoding == fd.encoding
         return pandas.read_csv(fd, encoding=None, dialect=dialect, **kwargs)

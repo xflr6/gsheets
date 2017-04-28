@@ -10,7 +10,7 @@ setup(
     description='Pythonic wrapper for the Google Sheets API',
     keywords='spreadhseets google api v4 wrapper csv pandas',
     license='MIT',
-    url='http://github.com/xflr6/gsheets',
+    url='https://github.com/xflr6/gsheets',
     packages=find_packages(),
     install_requires=['google-api-python-client'],
     platforms='any',

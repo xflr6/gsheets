@@ -29,7 +29,7 @@ def get_credentials(scopes=None, secrets=None, storage=None, no_webserver=False)
         storage: location of storage file (default: %r)
         no_webserver: url/code prompt instead of webbrowser based auth
 
-    see http://developers.google.com/sheets/quickstart/python
+    see https://developers.google.com/sheets/quickstart/python
     see https://developers.google.com/api-client-library/python/guide/aaa_client_secrets
     """
     scopes = Scopes.get(scopes)
@@ -56,7 +56,7 @@ def get_credentials(scopes=None, secrets=None, storage=None, no_webserver=False)
 class Scopes(object):
     """URLs for read or read/write access to Google sheets and drive.
 
-    see http://developers.google.com/sheets/guides/authorizing
+    see https://developers.google.com/sheets/guides/authorizing
 
     >>> Scopes.get('read')  # doctest: +NORMALIZE_WHITESPACE
     ('https://www.googleapis.com/auth/spreadsheets.readonly',
