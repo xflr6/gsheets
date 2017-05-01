@@ -9,9 +9,8 @@ pyasn1==0.2.3
 pyasn1-modules==0.0.8
 # dependencies for testing and building
 mock
-pytest>=2.10
+pytest>=3
 pytest-cov
-coverage
 flake8
 pep8-naming
 wheel
