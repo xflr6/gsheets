@@ -1,7 +1,9 @@
 gsheets
 =======
 
-|PyPI version| |License| |Supported Python| |Format| |Docs| |Travis|
+|PyPI version| |License| |Supported Python| |Format| |Docs|
+
+|Travis| |Coveralls|
 
 ``gsheets`` is a small wrapper around the `Google Sheets API`_ (v4) to provide
 more convenient access to `Google Sheets`_ from Python scripts.
@@ -203,5 +205,8 @@ This package is distributed under the `MIT license`_.
     :target: https://gsheets.readthedocs.io/en/latest/
     :alt: Readthedocs
 .. |Travis| image:: https://img.shields.io/travis/xflr6/gsheets.svg
-   :target: https://travis-ci.org/xflr6/gsheets/
+   :target: https://travis-ci.org/xflr6/gsheets
    :alt: Travis
+.. |Coveralls| image:: https://img.shields.io/coveralls/xflr6/gsheets.svg
+   :target: https://coveralls.io/github/xflr6/gsheets
+   :alt: Coveralls
