@@ -10,4 +10,4 @@ install:
   - pip install -e .
   - pip install mock "pytest>=3" pytest-cov coveralls
 script: pytest
-after_success: if [[ $ENV == python=3.6* ]]; then coveralls; fi
+after_success: if [[ $TRAVIS_PYTHON_VERSION == 3.6* ]]; then coveralls; fi
