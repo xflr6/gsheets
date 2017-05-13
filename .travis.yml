@@ -8,6 +8,6 @@ python:
 cache: pip
 install:
   - pip install -e .
-  - pip install mock "pytest>=3" pytest-cov coveralls
+  - pip install mock "pytest>=3" pytest-mock pytest-cov coveralls
 script: pytest
 after_success: if [[ $TRAVIS_PYTHON_VERSION == 3.6* ]]; then coveralls; fi

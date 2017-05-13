@@ -10,6 +10,7 @@ pyasn1-modules==0.0.8
 # dependencies for testing and building
 mock
 pytest>=3
+pytest-mock
 pytest-cov
 flake8
 pep8-naming

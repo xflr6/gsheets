@@ -1,11 +1,11 @@
 # test_models.py
 
-import pytest
 import mock
+import pytest
 
 import gsheets
 
-from gsheets._compat import map, PY2
+from gsheets._compat import PY2
 
 
 @pytest.fixture
@@ -78,8 +78,7 @@ class TestSpreadSheet(object):
         assert sheet.get(-1) is None
 
     def test_get_default(self, sheet):
-        default = object()
-        assert sheet.get(-1, default) is default
+        assert sheet.get(-1, mock.sentinel.default) is mock.sentinel.default
 
     def test_get_invalid(self, sheet):
         with pytest.raises(TypeError):
@@ -222,13 +221,14 @@ class TestWorkSheet(object):
     @staticmethod
     def _to_csv(obj, make_filename=None, lines=['1,2\r\n', '3,4\r\n'],
                 filename='Spam - Spam1.csv', encoding='utf-8'):
-        with mock.patch('gsheets._compat.open', mock.mock_open()) as open:
+        with mock.patch('gsheets._compat.open', mock.mock_open()) as open_:
             obj.to_csv(make_filename=make_filename)
+
         if PY2:
-            open.assert_called_once_with(filename, 'wb')
+            open_.assert_called_once_with(filename, 'wb')
         else:
-            open.assert_called_once_with(filename, 'w', encoding=encoding, newline='')
-        assert open().write.call_args_list == list(map(mock.call, lines))
+            open_.assert_called_once_with(filename, 'w', encoding=encoding, newline='')
+        assert open_.return_value.write.call_args_list == [mock.call(l,) for l in lines]
 
     def test_to_frame(self, ws):
         self._to_frame(ws)

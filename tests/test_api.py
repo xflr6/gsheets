@@ -13,20 +13,25 @@ def sheets():
 class TestSheets(object):
 
     def test_from_files(self, oauth2):
-        oauth2.file.Storage().get.return_value = None
+        oauth2.file.Storage.return_value.get.return_value = None
+
         sheets = gsheets.Sheets.from_files()
+
         oauth2.client.flow_from_clientsecrets.assert_called_once()
         oauth2.tools.run_flow.assert_called_once_with(
-            oauth2.client.flow_from_clientsecrets(), oauth2.file.Storage(),
-            oauth2.tools.argparser.parse_args())
+            oauth2.client.flow_from_clientsecrets.return_value,
+            oauth2.file.Storage.return_value,
+            oauth2.tools.argparser.parse_args.return_value)
         assert isinstance(sheets, gsheets.Sheets)
         assert sheets._creds is oauth2.tools.run_flow.return_value
 
     def test_from_files_cached(self, oauth2):
-        oauth2.file.Storage().get().invalid = False
+        oauth2.file.Storage.return_value.get.return_value.invalid = False
+
         sheets = gsheets.Sheets.from_files()
+
         assert isinstance(sheets, gsheets.Sheets)
-        assert sheets._creds is oauth2.file.Storage().get.return_value
+        assert sheets._creds is oauth2.file.Storage.return_value.get.return_value
 
     def test_len(self, sheets, files_all):
         assert len(sheets) == 1
