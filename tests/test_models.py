@@ -1,11 +1,13 @@
 # test_models.py
 
+import sys
+
 import mock
 import pytest
 
 import gsheets
 
-from gsheets._compat import PY2
+PY2 = sys.version_info[0] == 2
 
 
 @pytest.fixture
