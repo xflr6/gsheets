@@ -6,6 +6,8 @@ python:
   - "3.5"
   - "3.6"
 cache: pip
+before_cache:
+  - rm -f $HOME/.cache/pip/log/debug.log
 install:
   - pip install -e .
   - pip install "mock>=2" "pytest>=3" pytest-mock pytest-cov coveralls
