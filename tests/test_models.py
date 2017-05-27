@@ -207,7 +207,7 @@ class TestWorkSheet(object):
         assert ws.ncells == 4
 
     def test_to_csv(self, py2, open_, ws):
-        ws.to_csv()
+        ws.to_csv(make_filename=None)
         self._assert_open(py2, open_, 'Spam - Spam1.csv', 'utf-8', ['1,2\r\n', '3,4\r\n'])
 
     def test_to_csv_func(self, py2, open_, ws):
