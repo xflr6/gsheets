@@ -29,9 +29,9 @@ def open_(mocker):
 
 
 @pytest.fixture
-def pandas_read_csv(mocker):
+def pandas(mocker):
     def read_csv(fd, **kwargs):
-        return mocker.Mock(kwargs=dict(fd=fd.getvalue(), **kwargs))
+        return mocker.Mock(kwargs=dict(fd_getvalue=fd.getvalue(), **kwargs))
     yield mocker.patch('gsheets.export.pandas', **{'read_csv.side_effect': read_csv})
 
 

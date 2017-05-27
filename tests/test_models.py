@@ -228,13 +228,14 @@ class TestWorkSheet(object):
             open_.assert_called_once_with(filename, 'w', encoding=encoding, newline='')
         assert open_.return_value.write.call_args_list == [((a,),) for a in write_args]
 
-    def test_to_frame(self, py2, pandas_read_csv, ws):
+    def test_to_frame(self, mocker, py2, pandas, ws):
         mf = ws.to_frame()
-        assert mf.kwargs == {'fd': '1,2\r\n3,4\r\n', 'encoding': 'utf-8' if py2 else None, 'dialect': 'excel'}
+        pandas.read_csv.assert_called_once_with(mocker.ANY, encoding='utf-8' if py2 else None, dialect='excel')
+        assert mf.kwargs['fd_getvalue'] == '1,2\r\n3,4\r\n'
         assert mf.name == 'Spam1'
 
-    def test_to_frame_nonascii(self, py2, pandas_read_csv, ws_nonascii):
+    def test_to_frame_nonascii(self, mocker, py2, pandas, ws_nonascii):
         mf = ws_nonascii.to_frame()
-        assert mf.kwargs == {'fd': 'Sp\xc3\xa4m,Eggs\r\n,1\r\n' if py2 else u'Sp\xe4m,Eggs\r\n,1\r\n',
-                             'encoding': 'utf-8' if py2 else None, 'dialect': 'excel'}
+        pandas.read_csv.assert_called_once_with(mocker.ANY, encoding='utf-8' if py2 else None, dialect='excel')
+        assert mf.kwargs['fd_getvalue'] == 'Sp\xc3\xa4m,Eggs\r\n,1\r\n' if py2 else u'Sp\xe4m,Eggs\r\n,1\r\n'
         assert mf.name == 'Spam1'
