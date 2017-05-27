@@ -117,8 +117,12 @@ class TestSpreadSheet(object):
     def test_first_sheet(self, sheet):
         assert sheet.first_sheet is sheet.sheets[0]
 
-    def test_to_csv(self, sheet):
-        TestWorkSheet._to_csv(sheet)
+    def test_to_csv(self, mocker, sheet):
+        ws = mocker.Mock()
+        mocker.patch.object(sheet, '_sheets', **{'__iter__.return_value': [ws]})
+        args = [getattr(mocker.sentinel, s) for s in ('encoding', 'dialect', 'make_filename')]
+        sheet.to_csv(*args)
+        ws.to_csv_assert_called_once_with(None, *args)
 
 
 class TestSheetsView(object):
