@@ -1,13 +1,8 @@
 # test_models.py
 
-import sys
-
-import mock
 import pytest
 
 import gsheets
-
-PY2 = sys.version_info[0] == 2
 
 
 @pytest.fixture
@@ -211,50 +206,35 @@ class TestWorkSheet(object):
     def test_ncells(self, ws):
         assert ws.ncells == 4
 
-    def test_to_csv(self, ws):
-        self._to_csv(ws)
+    def test_to_csv(self, py2, open_, ws):
+        ws.to_csv()
+        self._assert_open(py2, open_, 'Spam - Spam1.csv', 'utf-8', ['1,2\r\n', '3,4\r\n'])
 
-    def test_to_csv_func(self, ws):
-        make_filename = lambda infos: '%(title)s-%(index)s-%(sheet)s.csv' % infos
-        self._to_csv(ws, make_filename=make_filename, filename='Spam-0-Spam1.csv')
+    def test_to_csv_func(self, py2, open_, ws):
+        ws.to_csv(make_filename=lambda infos: '%(title)s-%(index)s-%(sheet)s.csv' % infos)
+        self._assert_open(py2, open_, 'Spam-0-Spam1.csv', 'utf-8', ['1,2\r\n', '3,4\r\n'])
 
-    def test_to_csv_nonascii(self, ws_nonascii):
-        if PY2:
-            self._to_csv(ws_nonascii, lines=['Sp\xc3\xa4m,Eggs\r\n', ',1\r\n'])
-        else:
-            self._to_csv(ws_nonascii, lines=[u'Sp\xe4m,Eggs\r\n', u',1\r\n'])
+    def test_to_csv_nonascii(self, py2, open_, ws_nonascii):
+        ws_nonascii.to_csv()
+        self._assert_open(py2, open_, 'Spam - Spam1.csv', 'utf-8',
+                          ['Sp\xc3\xa4m,Eggs\r\n', ',1\r\n'] if py2 else
+                          [u'Sp\xe4m,Eggs\r\n', u',1\r\n'])
 
     @staticmethod
-    def _to_csv(obj, make_filename=None, lines=['1,2\r\n', '3,4\r\n'],
-                filename='Spam - Spam1.csv', encoding='utf-8'):
-        with mock.patch('gsheets._compat.open', mock.mock_open()) as open_:
-            obj.to_csv(make_filename=make_filename)
-
-        if PY2:
+    def _assert_open(py2, open_, filename, encoding, write_args):
+        if py2:
             open_.assert_called_once_with(filename, 'wb')
         else:
             open_.assert_called_once_with(filename, 'w', encoding=encoding, newline='')
-        assert open_.return_value.write.call_args_list == [mock.call(l,) for l in lines]
+        assert open_.return_value.write.call_args_list == [((a,),) for a in write_args]
 
-    def test_to_frame(self, ws):
-        self._to_frame(ws)
+    def test_to_frame(self, py2, pandas_read_csv, ws):
+        mf = ws.to_frame()
+        assert mf.kwargs == {'fd': '1,2\r\n3,4\r\n', 'encoding': 'utf-8' if py2 else None, 'dialect': 'excel'}
+        assert mf.name == 'Spam1'
 
-    def test_to_frame_nonascii(self, ws_nonascii):
-        if PY2:
-            self._to_frame(ws_nonascii, 'Sp\xc3\xa4m,Eggs\r\n,1\r\n')
-        else:
-            self._to_frame(ws_nonascii, u'Sp\xe4m,Eggs\r\n,1\r\n')
-
-    @staticmethod
-    def _to_frame(ws, data='1,2\r\n3,4\r\n', name='Spam1'):
-        def read_csv(fd, encoding, dialect):
-            if PY2:
-                assert encoding == 'utf-8' and dialect == 'excel'
-            else:
-                assert encoding is None and dialect == 'excel'
-            assert fd.getvalue() == data
-            return mock.NonCallableMock()
-        with mock.patch('gsheets.export.pandas') as pandas:
-            pandas.read_csv.side_effect = read_csv
-            df = ws.to_frame()
-        assert df.name == name
+    def test_to_frame_nonascii(self, py2, pandas_read_csv, ws_nonascii):
+        mf = ws_nonascii.to_frame()
+        assert mf.kwargs == {'fd': 'Sp\xc3\xa4m,Eggs\r\n,1\r\n' if py2 else u'Sp\xe4m,Eggs\r\n,1\r\n',
+                             'encoding': 'utf-8' if py2 else None, 'dialect': 'excel'}
+        assert mf.name == 'Spam1'

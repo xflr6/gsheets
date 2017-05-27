@@ -1,5 +1,7 @@
 # conftest.py
 
+import sys
+
 import pytest
 
 FILES = {'files': [{'id': 'spam', 'name': 'Spam'}]}
@@ -14,6 +16,23 @@ SPREADSHEET = {
     },
     'values': {'valueRanges': [{'values': [[1, 2], [3, 4]]}]},
 }
+
+
+@pytest.fixture(scope='session')
+def py2():
+    return sys.version_info[0] == 2
+
+
+@pytest.fixture
+def open_(mocker):
+    yield mocker.patch('gsheets._compat.open', mocker.mock_open())    
+
+
+@pytest.fixture
+def pandas_read_csv(mocker):
+    def read_csv(fd, **kwargs):
+        return mocker.Mock(kwargs=dict(fd=fd.getvalue(), **kwargs))
+    yield mocker.patch('gsheets.export.pandas', **{'read_csv.side_effect': read_csv})
 
 
 @pytest.fixture
