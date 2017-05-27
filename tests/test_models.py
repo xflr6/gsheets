@@ -79,8 +79,8 @@ class TestSpreadSheet(object):
     def test_get_fail(self, sheet):
         assert sheet.get(-1) is None
 
-    def test_get_default(self, sheet):
-        assert sheet.get(-1, mock.sentinel.default) is mock.sentinel.default
+    def test_get_default(self, mocker, sheet):
+        assert sheet.get(-1, mocker.sentinel.default) is mocker.sentinel.default
 
     def test_get_invalid(self, sheet):
         with pytest.raises(TypeError):
