@@ -8,7 +8,7 @@ rsa==3.4.2
 pyasn1==0.2.3
 pyasn1-modules==0.0.8
 # dependencies for testing and building
-mock
+mock>=2
 pytest>=3
 pytest-mock
 pytest-cov
