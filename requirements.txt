@@ -3,7 +3,7 @@ google-api-python-client==1.6.2
 httplib2==0.10.3
 uritemplate==3.0.0
 six==1.10.0
-oauth2client==4.1.1
+oauth2client==4.1.2
 rsa==3.4.2
 pyasn1==0.2.3
 pyasn1-modules==0.0.9
