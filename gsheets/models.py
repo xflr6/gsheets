@@ -244,7 +244,7 @@ class WorkSheet(object):
         id = prop['sheetId']
         title = prop['title']
         index = prop['index']
-        values = valuerange['values']
+        values = valuerange.get('values', [])
         return cls(id, title, index, values)
 
     def __init__(self, id, title, index, values):
