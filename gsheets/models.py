@@ -347,7 +347,7 @@ class WorkSheet(object):
     @property
     def ncols(self):
         """Number of columns in the worksheet (int)."""
-        return len(self._values[0])
+        return len(self._values[0]) if self._values else 0
 
     @property
     def ncells(self):
