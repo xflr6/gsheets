@@ -244,7 +244,7 @@ class WorkSheet(object):
         id = prop['sheetId']
         title = prop['title']
         index = prop['index']
-        values = valuerange.get('values', [])
+        values = valuerange.get('values', [[]])
         return cls(id, title, index, values)
 
     def __init__(self, id, title, index, values):
@@ -347,7 +347,7 @@ class WorkSheet(object):
     @property
     def ncols(self):
         """Number of columns in the worksheet (int)."""
-        return len(self._values[0]) if self._values else 0
+        return len(self._values[0])
 
     @property
     def ncells(self):
