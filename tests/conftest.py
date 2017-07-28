@@ -127,5 +127,5 @@ def spreadsheet_values(apiclient, spreadsheet):
     batchGet.assert_called_once_with(
         spreadsheetId=spreadsheet['spreadsheet']['spreadsheetId'],
         ranges=[s['properties']['title'] for s in spreadsheet['spreadsheet']['sheets']],
-        majorDimension='ROWS', valueRenderOption='UNFORMATTED_VALUE')
+        majorDimension='ROWS', valueRenderOption='UNFORMATTED_VALUE', dateTimeRenderOption='FORMATTED_STRING')
     batchGet.return_value.execute.assert_called_once_with()
