@@ -62,7 +62,8 @@ def spreadsheet(service, id):
 
 def values(service, id, ranges):
     """Fetch and return spreadsheet cell values with Google sheets API."""
-    params = {'majorDimension': 'ROWS', 'valueRenderOption': 'UNFORMATTED_VALUE'}
+    params = {'majorDimension': 'ROWS', 'valueRenderOption': 'UNFORMATTED_VALUE',
+              'dateTimeRenderOption': 'FORMATTED_STRING'}
     params.update(spreadsheetId=id, ranges=ranges)
     response = service.spreadsheets().values().batchGet(**params).execute()
     return response['valueRanges']
