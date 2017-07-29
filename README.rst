@@ -202,7 +202,7 @@ This package is distributed under the `MIT license`_.
     :target: https://pypi.python.org/pypi/gsheets
     :alt: Downloads
 .. |Docs| image:: https://readthedocs.org/projects/gsheets/badge/?version=stable
-    :target: https://gsheets.readthedocs.io/en/latest/
+    :target: https://gsheets.readthedocs.io/en/stable/
     :alt: Readthedocs
 .. |Travis| image:: https://img.shields.io/travis/xflr6/gsheets.svg
    :target: https://travis-ci.org/xflr6/gsheets
