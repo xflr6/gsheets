@@ -2,10 +2,13 @@ Changelog
 =========
 
 
-Version 0.2.1 (in development)
-------------------------------
+Version 0.3 (in development)
+----------------------------
 
+Fetch datetime values as strings instead of days since December 30th 1899
+(backwards imcompatible, PR Andrea Nardelli).
 
+Fix handling of empty worksheets (PR lanfon72).
 
 
 Version 0.2
