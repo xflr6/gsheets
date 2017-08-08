@@ -45,9 +45,9 @@ def get_credentials(scopes=None, secrets=None, storage=None, no_webserver=False)
     creds = store.get()
 
     if creds is None or creds.invalid:
+        flow = client.flow_from_clientsecrets(secrets, scopes)
         args = ['--noauth_local_webserver'] if no_webserver else []
         flags = tools.argparser.parse_args(args)
-        flow = client.flow_from_clientsecrets(secrets, scopes)
         creds = tools.run_flow(flow, store, flags)
 
     return creds
