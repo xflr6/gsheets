@@ -53,14 +53,14 @@ class Cells(object):
     _rows = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
     def __getitem__(self, index):
-        coord = Coordinates.fromstring(index)
+        coord = Coordinates.from_string(index)
         return coord, coord(self._rows)
 
 
 class Coordinates(object):
     """Callable fetching values from row major cells.
 
-    >>> Coordinates.fromstring('B1')([[1, 2], [3, 4]])
+    >>> Coordinates.from_string('B1')([[1, 2], [3, 4]])
     2
 
     >>> Cells()[0]
@@ -125,9 +125,9 @@ class Coordinates(object):
         return _int(row) - 1
 
     @classmethod
-    def fromstring(cls, coord):
+    def from_string(cls, coord):
         if isinstance(coord, slice):
-            return Slice.fromslice(coord)
+            return Slice.from_slice(coord)
         xcol, xrow, col, row = cls._parse(coord)
         if xcol is not None:
             return Cell(cls._cint(xcol), cls._rint(xrow))
@@ -198,12 +198,12 @@ class Slice(Coordinates):
     """
 
     @classmethod
-    def fromslice(cls, coord):
+    def from_slice(cls, coord):
         """Return a value fetching callable given a slice of coordinate strings."""
         if coord.step is not None:
             raise NotImplementedError('no slice step support')
         elif coord.start is not None and coord.stop is not None:
-            return DoubleSlice.fromslice(coord)
+            return DoubleSlice.from_slice(coord)
         elif coord.start is not None:
             xcol, xrow, col, row = cls._parse(coord.start)
             if xcol is not None:
@@ -297,7 +297,7 @@ class StopRow(Row, Slice):
 class DoubleSlice(Slice):
 
     @classmethod
-    def fromslice(cls, coord):
+    def from_slice(cls, coord):
         sxcol, sxrow, scol, srow = cls._parse(coord.start)
         xcol, xrow, col, row = cls._parse(coord.stop)
         if sxcol is not None:

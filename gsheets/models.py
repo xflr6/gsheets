@@ -280,7 +280,7 @@ class WorkSheet(object):
             ValueError: if index canot be parsed
             IndexError: if index is out of range
         """
-        getter = coordinates.Coordinates.fromstring(index)
+        getter = coordinates.Coordinates.from_string(index)
         return getter(self._values)
 
     def at(self, row, col):
