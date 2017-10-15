@@ -146,6 +146,7 @@ See also
   upon gspread_, currently Python 2 only, GPL)
 - pygsheets_ |--| Google Spreadsheets Python API v4 (v4 port of gspread_
   providing further extensions)
+- gspread-pandas |--| Interact with Google Spreadsheet through Pandas DataFrames
 - pgsheets_ |--| Manipulate Google Sheets Using Pandas DataFrames (independent
   bidirectional transfer library, using the `legacy v3 API`_, Python 3 only)
 - PyDrive_ |--| Google Drive API made easy (google-api-python-client_ wrapper
@@ -177,6 +178,7 @@ This package is distributed under the `MIT license`_.
 .. _example Jupyter notebook: https://gist.github.com/egradman/3b8140930aef97f9b0e4
 .. _df2gspread: https://pypi.python.org/pypi/df2gspread
 .. _pygsheets : https://pypi.python.org/pypi/pygsheets
+.. _gspread-pandas: https://pypi.python.org/pypi/gspread-pandas
 .. _pgsheets: https://pypi.python.org/pypi/pgsheets
 .. _PyDrive: https://pypi.python.org/pypi/PyDrive
 
