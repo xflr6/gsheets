@@ -146,7 +146,7 @@ See also
   upon gspread_, currently Python 2 only, GPL)
 - pygsheets_ |--| Google Spreadsheets Python API v4 (v4 port of gspread_
   providing further extensions)
-- gspread-pandas |--| Interact with Google Spreadsheet through Pandas DataFrames
+- gspread-pandas_ |--| Interact with Google Spreadsheet through Pandas DataFrames
 - pgsheets_ |--| Manipulate Google Sheets Using Pandas DataFrames (independent
   bidirectional transfer library, using the `legacy v3 API`_, Python 3 only)
 - PyDrive_ |--| Google Drive API made easy (google-api-python-client_ wrapper
