@@ -1,3 +1,5 @@
+# development enviroment: install in development mode
+-e .[dev,test]
 # exact (transitive) dependency versions used in development
 google-api-python-client==1.6.4
 httplib2==0.10.3
@@ -7,12 +9,3 @@ oauth2client==4.1.2
 rsa==3.4.2
 pyasn1==0.4.2
 pyasn1-modules==0.2.1
-# dependencies for testing and building
-mock>=2
-pytest>=3.1
-pytest-mock
-pytest-cov
-flake8
-pep8-naming
-wheel
-twine
