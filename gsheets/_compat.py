@@ -4,7 +4,7 @@ import sys
 
 PY2 = sys.version_info[0] == 2
 
-if PY2:  # pragma: no cover
+if PY2:
     text_type = unicode
     string_types = basestring
 
@@ -16,7 +16,7 @@ if PY2:  # pragma: no cover
     open = open
 
     def open_csv(name, mode=None, encoding=None):
-        if mode is None:
+        if mode is None:  # pragma: no cover
             mode = ''
         if 'b' not in mode:
             mode += 'b'
@@ -30,7 +30,7 @@ if PY2:  # pragma: no cover
 
     try:
         from cStringIO import StringIO as CsvBuffer
-    except ImportError:
+    except ImportError:  # pragma: no cover
         from StringIO import StringIO as CsvBuffer
 
     def read_csv(pandas, fd, encoding, dialect, kwargs):
@@ -38,7 +38,7 @@ if PY2:  # pragma: no cover
         return pandas.read_csv(fd, encoding=encoding, dialect=dialect, **kwargs)
 
 
-else:  # pragma: no cover
+else:
     text_type = string_types = str
 
     def iteritems(d):
