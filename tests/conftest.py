@@ -61,17 +61,6 @@ def files(request, apiclient):
 
 
 @pytest.fixture
-def files_all(apiclient, files):
-    yield files
-
-    list_ = apiclient.drive.files.return_value.list
-    list_.assert_called_with(  # TODO
-        q="mimeType='application/vnd.google-apps.spreadsheet'",
-        orderBy='folder,name,createdTime', pageToken=None)
-    list_.return_value.execute.assert_called_with()
-
-
-@pytest.fixture
 def files_name(apiclient, files):
     yield files
 

@@ -33,50 +33,61 @@ def test_from_files_cached(oauth2):
     assert sheets._creds is oauth2.file.Storage.return_value.get.return_value
 
 
-def test_len(sheets, files_all):
+@pytest.mark.usefixtures('files')
+def test_len(sheets):
     assert len(sheets) == 1
 
 
-def test_iter(sheets, files_all, spreadsheet_values):
+@pytest.mark.usefixtures('files', 'spreadsheet_values')
+def test_iter(sheets):
     assert [s.id for s in sheets] == ['spam']
 
 
-def test_contains(sheets, spreadsheet):
+@pytest.mark.usefixtures('spreadsheet')
+def test_contains(sheets):
     assert 'spam' in sheets
 
 
-def test_contains_fail(sheets, spreadsheet_404):
+@pytest.mark.usefixtures('spreadsheet_404')
+def test_contains_fail(sheets):
     assert 'spam' not in sheets
 
 
-def test_getitem(sheets, spreadsheet_values):
+@pytest.mark.usefixtures('spreadsheet_values')
+def test_getitem(sheets):
     s = sheets['spam']
     assert s[0][:] == [[1, 2], [3, 4]]
 
 
-def test_getitem_fail(sheets, spreadsheet_404):
+@pytest.mark.usefixtures('spreadsheet_404')
+def test_getitem_fail(sheets):
     with pytest.raises(KeyError):
         sheets['spam']
 
 
-def test_getitem_all(sheets, files_all, spreadsheet_values):
+@pytest.mark.usefixtures('files', 'spreadsheet_values')
+def test_getitem_all(sheets):
     assert [s.id for s in sheets[:]] == ['spam']
 
 
-def test_get_id(sheets, spreadsheet_values):
+@pytest.mark.usefixtures('spreadsheet_values')
+def test_get_id(sheets):
     assert sheets.get('spam').id == 'spam'
 
 
-def test_get_url(sheets, spreadsheet_values):
+@pytest.mark.usefixtures('spreadsheet_values')
+def test_get_url(sheets):
     url = 'https://docs.google.com/spreadsheets/d/spam'
     assert sheets.get(url).id == 'spam'
 
 
-def test_get_fail(sheets, spreadsheet_404):
+@pytest.mark.usefixtures('spreadsheet_404')
+def test_get_fail(sheets):
     assert sheets.get('spam') is None
 
 
-def test_get_default(sheets, spreadsheet_404):
+@pytest.mark.usefixtures('spreadsheet_404')
+def test_get_default(sheets):
     default = object()
     assert sheets.get('spam', default) is default
 
@@ -86,38 +97,47 @@ def test_get_invalid(sheets):
         sheets.get('https://spam.com/spam/d/spam')
 
 
-def test_find(sheets, files_name, spreadsheet_values):
+@pytest.mark.usefixtures('files_name', 'spreadsheet_values')
+def test_find(sheets):
     assert sheets.find('Spam').id == 'spam'
 
 
-def test_find_fail(sheets, files_name_unknown):
+@pytest.mark.usefixtures('files_name_unknown')
+def test_find_fail(sheets):
     with pytest.raises(KeyError):
         sheets.find('Spam')
 
 
-def test_findall(sheets, files_name, spreadsheet_values):
+@pytest.mark.usefixtures('files_name', 'spreadsheet_values')
+def test_findall(sheets):
     assert [s.id for s in sheets.findall('Spam')] == ['spam']
 
 
+@pytest.mark.usefixtures('files_name_unknown')
 def test_findall_fail(sheets, files_name_unknown):
     assert [s.id for s in sheets.findall('Spam')] == []
 
 
-def test_findall_all(sheets, files_all, spreadsheet_values):
+@pytest.mark.usefixtures('files', 'spreadsheet_values')
+def test_findall_all(sheets):
     assert [s.id for s in sheets.findall()] == ['spam']
 
 
-def test_iterfiles(sheets, files_all):
+@pytest.mark.usefixtures('files')
+def test_iterfiles(sheets):
     assert list(sheets.iterfiles()) == [('spam', 'Spam')]
 
 
-def test_ids(sheets, files_all):
+@pytest.mark.usefixtures('files')
+def test_ids(sheets):
     assert sheets.ids() == ['spam']
 
 
-def test_titles(sheets, files_all):
+@pytest.mark.usefixtures('files')
+def test_titles(sheets):
     assert sheets.titles() == ['Spam']
 
 
-def test_titles_unique(sheets, files_all):
+@pytest.mark.usefixtures('files')
+def test_titles_unique(sheets):
     assert sheets.titles(unique=True) == ['Spam']

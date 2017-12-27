@@ -210,15 +210,18 @@ class TestWorkSheet(object):
         ws.to_csv(make_filename=None)
         self._assert_open(py2, open_, 'Spam - Spam1.csv', 'utf-8', ['1,2\r\n', '3,4\r\n'])
 
+    def test_to_csv_filename(self, py2, open_, ws):
+        ws.to_csv(filename='Spam.csv')
+        self._assert_open(py2, open_, 'Spam.csv', 'utf-8', ['1,2\r\n', '3,4\r\n'])
+
     def test_to_csv_func(self, py2, open_, ws):
         ws.to_csv(make_filename=lambda infos: '%(title)s-%(index)s-%(sheet)s.csv' % infos)
         self._assert_open(py2, open_, 'Spam-0-Spam1.csv', 'utf-8', ['1,2\r\n', '3,4\r\n'])
 
     def test_to_csv_nonascii(self, py2, open_, ws_nonascii):
         ws_nonascii.to_csv()
-        self._assert_open(py2, open_, 'Spam - Spam1.csv', 'utf-8',
-                          ['Sp\xc3\xa4m,Eggs\r\n', ',1\r\n'] if py2 else
-                          [u'Sp\xe4m,Eggs\r\n', u',1\r\n'])
+        write_args = ['Sp\xc3\xa4m,Eggs\r\n', ',1\r\n'] if py2 else [u'Sp\xe4m,Eggs\r\n', u',1\r\n']
+        self._assert_open(py2, open_, 'Spam - Spam1.csv', 'utf-8', write_args)
 
     @staticmethod
     def _assert_open(py2, open_, filename, encoding, write_args):
@@ -230,12 +233,15 @@ class TestWorkSheet(object):
 
     def test_to_frame(self, mocker, py2, pandas, ws):
         mf = ws.to_frame()
-        pandas.read_csv.assert_called_once_with(mocker.ANY, encoding='utf-8' if py2 else None, dialect='excel')
+        encoding = 'utf-8' if py2 else None
+        pandas.read_csv.assert_called_once_with(mocker.ANY, encoding=encoding, dialect='excel')
         assert mf.kwargs['fd_getvalue'] == '1,2\r\n3,4\r\n'
         assert mf.name == 'Spam1'
 
     def test_to_frame_nonascii(self, mocker, py2, pandas, ws_nonascii):
         mf = ws_nonascii.to_frame()
-        pandas.read_csv.assert_called_once_with(mocker.ANY, encoding='utf-8' if py2 else None, dialect='excel')
-        assert mf.kwargs['fd_getvalue'] == 'Sp\xc3\xa4m,Eggs\r\n,1\r\n' if py2 else u'Sp\xe4m,Eggs\r\n,1\r\n'
+        encoding = 'utf-8' if py2 else None
+        pandas.read_csv.assert_called_once_with(mocker.ANY, encoding=encoding, dialect='excel')
+        value = 'Sp\xc3\xa4m,Eggs\r\n,1\r\n' if py2 else u'Sp\xe4m,Eggs\r\n,1\r\n'
+        assert mf.kwargs['fd_getvalue'] == value
         assert mf.name == 'Spam1'
