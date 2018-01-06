@@ -1,4 +1,4 @@
-# development enviroment: install in development mode
+# development environment: install in development mode
 -e .[dev,test]
 # exact (transitive) dependency versions used in development
 google-api-python-client==1.6.4

@@ -20,7 +20,7 @@ SPREADSHEET = {
 
 @pytest.fixture(scope='session')
 def py2():
-    return sys.version_info[0] == 2
+    return sys.version_info.major == 2
 
 
 @pytest.fixture
