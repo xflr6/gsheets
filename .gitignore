@@ -16,4 +16,5 @@ __pycache__/
 /.tox/
 
 Thumbs.db
+
 /Spam - *.csv

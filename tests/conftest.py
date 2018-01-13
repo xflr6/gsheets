@@ -25,7 +25,7 @@ def py2():
 
 @pytest.fixture
 def open_(mocker):
-    yield mocker.patch('gsheets._compat.open', mocker.mock_open())    
+    yield mocker.patch('gsheets._compat.open', mocker.mock_open())
 
 
 @pytest.fixture

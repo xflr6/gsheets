@@ -195,14 +195,14 @@ class SheetsView(tools.list_view):
 
     def __eq__(self, other):
         if isinstance(other, SheetsView):
-            return (self.titles() == other.titles()
-                and all(s == o for s, o in zip(self._items, other._items)))
+            return (self.titles() == other.titles() and
+                all(s == o for s, o in zip(self._items, other._items)))
         return NotImplemented
 
     def __ne__(self, other):
         if isinstance(other, SheetsView):
-            return (self.titles() != other.titles()
-                or any(s != o for s, o in zip(self._items, other._items)))
+            return (self.titles() != other.titles() or
+                any(s != o for s, o in zip(self._items, other._items)))
         return NotImplemented
 
     def __getitem__(self, index):
