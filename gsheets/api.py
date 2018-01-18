@@ -18,9 +18,9 @@ class Sheets(object):
         """Return a spreadsheet collection making OAauth 2.0 credentials.
 
         Args:
-            secrets (str): location of secrets file (default: %r)
-            storage (str): location of storage file (default: %r)
-            scopes: scope URL(s) or 'read' or 'write' (default: %r)
+            secrets (str): location of secrets file (default: ``%r``)
+            storage (str): location of storage file (default: ``%r``)
+            scopes: scope URL(s) or ``'read'`` or ``'write'`` (default: ``%r``)
             no_webserver (bool): URL/code prompt instead of webbrowser auth
         Returns:
             Sheets: new Sheets instance with OAauth 2.0 credentials
@@ -63,7 +63,7 @@ class Sheets(object):
         Args:
             id (str): unique alphanumeric id of the spreadsheet
         Returns:
-            bool: True if it can be fetched else False
+            bool: ``True`` if it can be fetched else ``False``
         """
         try:
             backend.spreadsheet(self._sheets, id)
@@ -80,7 +80,7 @@ class Sheets(object):
         Returns:
             SpreadSheet: new SpreadSheet instance
         Raises:
-            KeyError: if no spreadsheet with the given id is found
+            KeyError: if no spreadsheet with the given ``id`` is found
         """
         if id == slice(None, None):
             return list(self)
@@ -116,7 +116,7 @@ class Sheets(object):
         Returns:
             SpreadSheet: new SpreadSheet instance
         Raises:
-            KeyError: if no spreadsheet with the given title is found
+            KeyError: if no spreadsheet with the given ``title`` is found
         """
         files = backend.iterfiles(self._drive, name=title)
         try:
@@ -128,7 +128,7 @@ class Sheets(object):
         """Fetch and return a list of spreadsheets with the given title.
 
         Args:
-            title(str): title/name of the spreadsheets to return, or None for all
+            title(str): title/name of the spreadsheets to return, or ``None`` for all
         Returns:
             list: list of new SpreadSheet instances (possibly empty)
         """
@@ -138,10 +138,10 @@ class Sheets(object):
         return [self[id] for id, _ in files]
 
     def iterfiles(self):
-        """Yield (id, title) pairs for all available spreadsheets.
+        """Yield ``(id, title)`` pairs for all available spreadsheets.
 
         Yields:
-            pairs of unique id (str) and title/name (str)
+            pairs of unique id (``str``) and title/name (``str``)
         """
         return backend.iterfiles(self._drive)
 

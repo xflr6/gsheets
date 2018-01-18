@@ -11,7 +11,7 @@ __all__ = ['Coordinates']
 
 
 def base26int(s, _start=1 - ord('A')):
-    """Return string s as int in bijective base26 notation.
+    """Return string ``s`` as ``int`` in bijective base26 notation.
 
     >>> base26int('SPAM')
     344799
@@ -20,7 +20,7 @@ def base26int(s, _start=1 - ord('A')):
 
 
 def base26(x, _alphabet=string.ascii_uppercase):
-    """Return positive int x as string in bijective base26 notation.
+    """Return positive ``int`` ``x`` as string in bijective base26 notation.
 
     >>> [base26(i) for i in [0, 1, 2, 26, 27, 28, 702, 703, 704]]
     ['', 'A', 'B', 'Z', 'AA', 'AB', 'ZZ', 'AAA', 'AAB']

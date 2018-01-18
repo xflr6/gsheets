@@ -19,13 +19,13 @@ MAKE_FILENAME = '%(title)s - %(sheet)s.csv'
 
 
 def write_csv(fileobj, rows, encoding=ENCODING, dialect=DIALECT):
-    """Dump rows to fileobj with the given encoding and CSV dialect."""
+    """Dump rows to ``fileobj`` with the given ``encoding`` and CSV ``dialect``."""
     csvwriter = csv.writer(fileobj, dialect=dialect)
     csv_writerows(csvwriter, rows, encoding)
 
 
 def write_dataframe(rows, encoding=ENCODING, dialect=DIALECT, **kwargs):
-    """Dump rows to string buffer and load with pandas.read_csv using kwargs."""
+    """Dump ``rows`` to string buffer and load with ``pandas.read_csv()`` using ``kwargs``."""
     global pandas
     if pandas is None:  # pragma: no cover
         import pandas

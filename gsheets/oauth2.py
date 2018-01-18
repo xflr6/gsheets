@@ -24,9 +24,9 @@ def get_credentials(scopes=None, secrets=None, storage=None, no_webserver=False)
     """Make OAuth 2.0 credentials for scopes from secrets and storage files.
 
     Args:
-        scopes: scope URL(s) or 'read', 'write' (default: %r)
-        secrets: location of secrets file (default: %r)
-        storage: location of storage file (default: %r)
+        scopes: scope URL(s) or ``'read'``, ``'write'`` (default: ``%r``)
+        secrets: location of secrets file (default: ``%r``)
+        storage: location of storage file (default: ``%r``)
         no_webserver: url/code prompt instead of webbrowser based auth
 
     see https://developers.google.com/sheets/quickstart/python

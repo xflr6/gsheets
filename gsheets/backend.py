@@ -27,7 +27,7 @@ def build_service(name=None, **kwargs):
 
 
 def iterfiles(service, name=None, mimeType=SHEET, order=FILEORDER):
-    """Fetch and yield (id, name) pairs for Google drive files."""
+    """Fetch and yield ``(id, name)`` pairs for Google drive files."""
     params = {'orderBy': order, 'pageToken': None}
     q = []
     if name is not None:

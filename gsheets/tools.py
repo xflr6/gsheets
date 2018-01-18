@@ -41,7 +41,7 @@ class lazyproperty(object):
 
 
 def doctemplate(*args):
-    """Return a decorator putting args into the docstring of the decorated func.
+    """Return a decorator putting ``args`` into the docstring of the decorated ``func``.
 
     >>> @doctemplate('spam', 'spam')
     ... def spam():
@@ -104,7 +104,7 @@ class list_view(object):
 
 
 def group_dict(items, keyfunc):
-    """Return a list defaultdict with items grouped by keyfunc.
+    """Return a list defaultdict with ``items`` grouped by ``keyfunc``.
 
     >>> sorted(group_dict('eggs', lambda x: x).items())
     [('e', ['e']), ('g', ['g', 'g']), ('s', ['s'])]
@@ -117,7 +117,7 @@ def group_dict(items, keyfunc):
 
 
 def eval_source(source):
-    """Return eval(source) with source attached as attribute.
+    """Return ``eval(source)`` with ``source`` attached as attribute.
 
     >>> eval_source("lambda: 'spam'")()
     'spam'
@@ -131,7 +131,7 @@ def eval_source(source):
 
 
 def uniqued(iterable):
-    """Return unique list of iterable items preserving order.
+    """Return unique list of ``iterable`` items preserving order.
 
     >>> uniqued('spameggs')
     ['s', 'p', 'a', 'm', 'e', 'g']

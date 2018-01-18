@@ -67,9 +67,9 @@ class SpreadSheet(object):
         Args:
             id (int): numeric id of the worksheet
         Returns:
-            bool: True if such a worksheet is present else False
+            bool: ``True`` if such a worksheet is present else ``False``
         Raises:
-            TypeError: if id is not an int
+            TypeError: if ``id`` is not an ``int``
         """
         if not isinstance(id, int):
             raise TypeError(id)
@@ -83,8 +83,8 @@ class SpreadSheet(object):
         Returns:
             WorkSheet: contained worksheet object
         Raises:
-            TypeError: if id is not an int
-            KeyError: if the spreadsheet has no worksheet with the given id
+            TypeError: if ``id`` is not an ``int``
+            KeyError: if the spreadsheet has no worksheet with the given ``id``
         """
         if not isinstance(id, int):
             raise TypeError(id)
@@ -98,7 +98,7 @@ class SpreadSheet(object):
         Returns:
             WorkSheet: contained worksheet object or given default
         Raises:
-            ValueError: if id is not an int
+            ValueError: if ``id`` is not an ``int``
         """
         try:
             return self[id]
@@ -113,7 +113,7 @@ class SpreadSheet(object):
         Returns:
             WorkSheet: contained worksheet object
         Raises:
-            KeyError: if the spreadsheet has no no worksheet with the given title
+            KeyError: if the spreadsheet has no no worksheet with the given ``title``
         """
         if title not in self._titles:
             raise KeyError(title)
@@ -123,7 +123,7 @@ class SpreadSheet(object):
         """Return a list of worksheets with the given title.
 
         Args:
-            title(str): title/name of the worksheets to return, or None for all
+            title(str): title/name of the worksheets to return, or ``None`` for all
         Returns:
             list: list of contained worksheet instances (possibly empty)
         """
@@ -146,7 +146,7 @@ class SpreadSheet(object):
 
     @property
     def id(self):
-        """Unique alphanumeric id of the spreadsheet (str).
+        """Unique alphanumeric id of the spreadsheet (``str``).
 
         see https://developers.google.com/sheets/guides/concepts#spreadsheet_id
         """
@@ -154,12 +154,12 @@ class SpreadSheet(object):
 
     @property
     def title(self):
-        """Title/name of the spreadsheet (str)."""
+        """Title/name of the spreadsheet (``str``)."""
         return self._title
 
     @property
     def url(self):
-        """URL pointing to the first worksheet of the spreadsheet (str)."""
+        """URL pointing to the first worksheet of the spreadsheet (``str``)."""
         return self._url.to_string()
 
     @property
@@ -211,7 +211,7 @@ class SheetsView(tools.list_view):
         Args:
             index: zero-based position or slice
         Raises:
-            IndexError: if index is out of range
+            IndexError: if ``index`` is out of range
         """
         return self._items[index]
 
@@ -219,7 +219,7 @@ class SheetsView(tools.list_view):
         """Return a list of contained worksheet ids.
 
         Returns:
-            list: list of numeric ids (int)
+            list: list of numeric ids (``int``)
         """
         return [s.id for s in self._items]
 
@@ -276,9 +276,9 @@ class WorkSheet(object):
         Returns:
             value (cell), list(col, row), or nested list (two-dimentional slice)
         Raises:
-            TypeError: if index is not a string or slice of strings
-            ValueError: if index canot be parsed
-            IndexError: if index is out of range
+            TypeError: if ``index`` is not a string or slice of strings
+            ValueError: if ``index`` canot be parsed
+            IndexError: if ``index`` is out of range
         """
         getter = coordinates.Coordinates.from_string(index)
         return getter(self._values)
@@ -292,7 +292,7 @@ class WorkSheet(object):
         Returns:
             cell value
         Raises:
-            TypeError: if row or col is not an int
+            TypeError: if ``row`` or ``col`` is not an ``int``
             IndexError: if the position is out of range
         """
         if not (isinstance(row, int) and isinstance(col, int)):
@@ -318,7 +318,7 @@ class WorkSheet(object):
 
     @property
     def id(self):
-        """Stable numeric worksheet id (int), unique within its spreadsheet.
+        """Stable numeric worksheet id (``int``), unique within its spreadsheet.
 
         see https://developers.google.com/sheets/guides/concepts#sheet_id
         """
@@ -326,12 +326,12 @@ class WorkSheet(object):
 
     @property
     def title(self):
-        """Worksheet title/name (str)."""
+        """Worksheet title/name (``str``)."""
         return self._title
 
     @property
     def url(self):
-        """URL pointing to the worksheet (str)."""
+        """URL pointing to the worksheet (``str``)."""
         return self._spreadsheet._url.to_string(gid=self.id)
 
     @property
@@ -341,7 +341,7 @@ class WorkSheet(object):
 
     @property
     def nrows(self):
-        """Number of rows in the worksheet (int)."""
+        """Number of rows in the worksheet (``int``)."""
         return len(self._values)
 
     @property
@@ -351,7 +351,7 @@ class WorkSheet(object):
 
     @property
     def ncells(self):
-        """Number of cells in the worksheet (int)."""
+        """Number of cells in the worksheet (``int``)."""
         return self.nrows * self.ncols
 
     def to_csv(self, filename=None,
@@ -360,7 +360,7 @@ class WorkSheet(object):
         """Dump the worksheet to a CSV file.
 
         Args:
-            filename (str): result filename (if None use make_filename)
+            filename (str): result filename (if ``None`` use ``make_filename``)
             encoding (str): result string encoding
             dialect (str): :mod:`csv` dialect name or object to use
             make_filename: template or one-argument callable returning the filename
@@ -394,12 +394,12 @@ class WorkSheet(object):
             export.write_csv(fd, self._values, encoding, dialect)
 
     def to_frame(self, **kwargs):
-        """Return a pandas DataFrame loaded from the worksheet data.
+        r"""Return a pandas DataFrame loaded from the worksheet data.
 
         Keyword Args:
-            **kwargs: kwargs passed to pandas.read_csv (e.g. header, index_col)
+            \**kwargs: kwargs passed to ``pandas.read_csv()`` (e.g. ``header``, ``index_col``)
         Returns:
-            pandas.DataFrame: new DataFrame
+            pandas.DataFrame: new ``DataFrame`` instance
         """
         df = export.write_dataframe(self._values, **kwargs)
         df.name = self.title
