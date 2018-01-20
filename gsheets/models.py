@@ -237,6 +237,7 @@ class SheetsView(tools.list_view):
 
 
 class WorkSheet(object):
+    """Two-dimensional table with cells accessible via A1 notation."""
 
     @classmethod
     def _from_response(cls, response, valuerange):
@@ -396,8 +397,8 @@ class WorkSheet(object):
     def to_frame(self, **kwargs):
         r"""Return a pandas DataFrame loaded from the worksheet data.
 
-        Keyword Args:
-            \**kwargs: kwargs passed to ``pandas.read_csv()`` (e.g. ``header``, ``index_col``)
+        Args:
+            \**kwargs: passed to ``pandas.read_csv()`` (e.g. ``header``, ``index_col``)
         Returns:
             pandas.DataFrame: new ``DataFrame`` instance
         """

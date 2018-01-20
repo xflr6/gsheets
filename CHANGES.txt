@@ -16,25 +16,25 @@ Fetch datetime values as strings instead of days since December 30th 1899
 
 Fix handling of empty worksheets (PR lanfon72).
 
-Include license file in wheel.
+Include LICENSE file in wheel.
 
 
 Version 0.2
 -----------
 
-Make a1 notation slices inclusive (backwards incompatible).
+Make A1 notation slices inclusive (backwards incompatible).
 
-Also support template strings for make_filename.
+Also support template strings for ``make_filename``.
 
-Change make_filename callable to a one argument functon giving a dictionary.
+Change ``make_filename`` callable to a one argument functon given a dictionary.
 
-Add equivalence for SpreadSheet, SheetsView, and WorkSheet.
+Add equivalence for ``SpreadSheet``, ``SheetsView``, and ``WorkSheet``.
 
-Include get_credentials and build_service as low-level api functions.
+Include ``get_credentials()`` and ``build_service()`` as low-level api functions.
 
-Add no_webserver auth for working on remote machines.
+Add ``no_webserver`` auth for working on remote machines.
 
-Change default filename for client secrets to client_secrets.json.
+Change default filename for client secrets to ``'client_secrets.json``'.
 
 Include docs in source distribution.
 

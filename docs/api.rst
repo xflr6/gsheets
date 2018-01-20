@@ -4,6 +4,17 @@ API Reference
 =============
 
 
+.. autosummary::
+    :nosignatures:
+
+    gsheets.Sheets
+    gsheets.models.SpreadSheet
+    gsheets.models.SheetsView
+    gsheets.models.WorkSheet
+    gsheets.get_credentials
+    gsheets.build_service
+
+
 Sheets
 ------
 

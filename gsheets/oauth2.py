@@ -21,7 +21,7 @@ STORAGE = '~/storage.json'
 
 @doctemplate(SCOPES, SECRETS, STORAGE)
 def get_credentials(scopes=None, secrets=None, storage=None, no_webserver=False):
-    """Make OAuth 2.0 credentials for scopes from secrets and storage files.
+    """Make OAuth 2.0 credentials for scopes from ``secrets`` and ``storage`` files.
 
     Args:
         scopes: scope URL(s) or ``'read'``, ``'write'`` (default: ``%r``)
@@ -91,7 +91,7 @@ class Scopes(object):
 
     @classmethod
     def get(cls, scope=None):
-        """Return default or predefined URLs from keyword, pass through scopes."""
+        """Return default or predefined URLs from keyword, pass through ``scope``."""
         if scope is None:
             scope = cls.default
         if isinstance(scope, string_types) and scope in cls._keywords:

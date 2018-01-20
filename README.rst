@@ -10,16 +10,17 @@ more convenient access to `Google Sheets`_ from Python scripts.
 
 `Turn on the API`_, download an OAuth client ID as JSON file, and create a
 ``Sheets`` object from it. Use its index access (``__getitem__``) to retrieve
-SpreadSheet objects by their id, or use ``get()`` with a sheet URL.
+SpreadSheet objects by their id, or use ``.get()`` with a sheet URL.
 Iterate over the ``Sheets`` object for all spreadsheets, or fetch spreadsheets
-by title with the ``find()`` and ``findall()`` methods.
+by title with the ``.find()`` and ``.findall()`` methods.
 
 SpreadSheet objects are collections of WorkSheets, which provide access to the
 cell values via spreadsheet coordinates/slices (e.g. ``ws['A1']``) and
 zero-based cell position (e.g. ``ws.at(0, 1)``).
 
-Save WorkSheets (or all from a SpreadSheet) as CSV files with the ``to_csv``
-method. Create pandas DataFrames from worksheet with the ``to_frame`` method.
+Save WorkSheets (or all from a SpreadSheet) as CSV files with the
+``.to_csv()``-method. Create ``pandas.DataFrames`` from worksheet with the
+``.to_frame()``-method.
 
 
 Links
