@@ -20,7 +20,7 @@ setup(
     ],
     extras_require={
         'dev': ['flake8', 'pep8-naming', 'wheel', 'twine'],
-        'test': ['mock>=2', 'pytest>=3.3', 'pytest-mock', 'pytest-cov'],
+        'test': ['mock>=2', 'pytest>=3.4', 'pytest-mock', 'pytest-cov'],
         'docs': ['sphinx>=1.3', 'sphinx-rtd-theme'],
     },
     long_description=io.open('README.rst', encoding='utf-8').read(),
