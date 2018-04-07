@@ -117,7 +117,7 @@ class TestSpreadSheet(object):
         mocker.patch.object(sheet, '_sheets', **{'__iter__.return_value': [ws]})
         args = [getattr(mocker.sentinel, s) for s in ('encoding', 'dialect', 'make_filename')]
         sheet.to_csv(*args)
-        ws.to_csv_assert_called_once_with(None, *args)
+        ws.to_csv.assert_called_once_with(None, *args)
 
 
 class TestSheetsView(object):
