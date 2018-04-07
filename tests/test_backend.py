@@ -6,7 +6,8 @@ from gsheets import backend
 
 
 def test_build_service(mocker, serviceName='spam', version='v1'):
-    build = mocker.patch('gsheets.backend.apiclient.discovery.build')
+    build = mocker.patch('gsheets.backend.apiclient.discovery.build',
+                         new_callable=mocker.Mock)
     backend.build_service(serviceName=serviceName, version=version)
     build.assert_called_once_with(serviceName=serviceName, version=version)
 

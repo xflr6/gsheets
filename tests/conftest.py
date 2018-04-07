@@ -31,25 +31,29 @@ def open_(mocker):
 @pytest.fixture
 def pandas(mocker):
     def read_csv(fd, **kwargs):
-        return mocker.Mock(kwargs=dict(fd_getvalue=fd.getvalue(), **kwargs))
-    yield mocker.patch('gsheets.export.pandas', **{'read_csv.side_effect': read_csv})
+        kwargs = dict(fd_getvalue=fd.getvalue(), **kwargs)
+        return mocker.NonCallableMock(kwargs=kwargs)
+    yield mocker.patch('gsheets.export.pandas', new_callable=mocker.NonCallableMock,
+                       **{'read_csv.side_effect': read_csv})
 
 
 @pytest.fixture
 def oauth2(mocker):
     kwargs = dict.fromkeys(['file', 'client', 'tools'], mocker.DEFAULT)
-    mocks = mocker.patch.multiple('gsheets.oauth2', **kwargs)
+    mocks = mocker.patch.multiple('gsheets.oauth2', new_callable=mocker.NonCallableMock,
+                                  **kwargs)
 
-    yield mocker.Mock(**mocks)
+    yield mocker.NonCallableMock(**mocks)
 
 
 @pytest.fixture
 def apiclient(mocker):
-    services = {'sheets': mocker.Mock(), 'drive': mocker.Mock()}
+    services = {s: mocker.NonCallableMock() for s in ['sheets', 'drive']}
     build = lambda serviceName, **kwargs: services[serviceName]
-    mocker.patch('gsheets.backend.apiclient.discovery.build', side_effect=build)
+    mocker.patch('gsheets.backend.apiclient.discovery.build', side_effect=build,
+                  new_callable=mocker.Mock)
 
-    yield mocker.Mock(**services)
+    yield mocker.NonCallableMock(**services)
 
 
 @pytest.fixture
@@ -87,7 +91,7 @@ def files_name_unknown(apiclient, files):
 @pytest.fixture
 def spreadsheet_404(mocker, apiclient):
     from apiclient.errors import HttpError
-    http404 = HttpError(resp=mocker.Mock(status=404), content=b'')
+    http404 = HttpError(resp=mocker.NonCallableMock(status=404), content=b'')
     apiclient.sheets.spreadsheets.return_value.get.return_value.execute.side_effect = http404
 
     yield http404
