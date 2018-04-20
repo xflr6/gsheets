@@ -27,11 +27,11 @@ Links
 -----
 
 - GitHub: https://github.com/xflr6/gsheets
-- PyPI: https://pypi.python.org/pypi/gsheets
+- PyPI: https://pypi.org/project/gsheets/
 - Documentation: https://gsheets.readthedocs.io
 - Changelog: https://gsheets.readthedocs.io/en/latest/changelog.html
 - Issue Tracker: https://github.com/xflr6/gsheets/issues
-- Download: https://pypi.python.org/pypi/gsheets#downloads
+- Download: https://pypi.org/project/gsheets/#files
 
 
 Installation
@@ -166,22 +166,22 @@ This package is distributed under the `MIT license`_.
 .. _Turn on the API: https://developers.google.com/sheets/quickstart/python#step_1_turn_on_the_api_name
 
 .. _pip: https://pip.readthedocs.io
-.. _google-api-python-client: https://pypi.python.org/pypi/google-api-python-client
-.. _httplib2: https://pypi.python.org/pypi/httplib2
-.. _oauth2client: https://pypi.python.org/pypi/oauth2client
-.. _rsa: https://pypi.python.org/pypi/rsa
+.. _google-api-python-client: https://pypi.org/project/google-api-python-client/
+.. _httplib2: https://pypi.org/project/httplib2/
+.. _oauth2client: https://pypi.org/project/oauth2client/
+.. _rsa: https://pypi.org/project/rsa/
 
 .. _Google Developers Console: https://console.developers.google.com
 
 .. _gsheets.py: https://gist.github.com/xflr6/57508d28adec1cd3cd047032e8d81266
-.. _gspread: https://pypi.python.org/pypi/gspread
+.. _gspread: https://pypi.org/project/gspread/
 .. _legacy v3 API: https://developers.google.com/google-apps/spreadsheets/
 .. _example Jupyter notebook: https://gist.github.com/egradman/3b8140930aef97f9b0e4
-.. _df2gspread: https://pypi.python.org/pypi/df2gspread
-.. _pygsheets : https://pypi.python.org/pypi/pygsheets
-.. _gspread-pandas: https://pypi.python.org/pypi/gspread-pandas
-.. _pgsheets: https://pypi.python.org/pypi/pgsheets
-.. _PyDrive: https://pypi.python.org/pypi/PyDrive
+.. _df2gspread: https://pypi.org/project/df2gspread/
+.. _pygsheets : https://pypi.org/project/pygsheets/
+.. _gspread-pandas: https://pypi.org/project/gspread-pandas/
+.. _pgsheets: https://pypi.org/project/pgsheets/
+.. _PyDrive: https://pypi.org/project/PyDrive/
 
 .. _MIT license: https://opensource.org/licenses/MIT
 
@@ -190,20 +190,17 @@ This package is distributed under the `MIT license`_.
 
 
 .. |PyPI version| image:: https://img.shields.io/pypi/v/gsheets.svg
-    :target: https://pypi.python.org/pypi/gsheets
+    :target: https://pypi.org/project/gsheets/
     :alt: Latest PyPI Version
 .. |License| image:: https://img.shields.io/pypi/l/gsheets.svg
-    :target: https://pypi.python.org/pypi/gsheets
+    :target: https://pypi.org/project/gsheets/
     :alt: License
 .. |Supported Python| image:: https://img.shields.io/pypi/pyversions/gsheets.svg
-    :target: https://pypi.python.org/pypi/gsheets
+    :target: https://pypi.org/project/gsheets/
     :alt: Supported Python Versions
 .. |Format| image:: https://img.shields.io/pypi/format/gsheets.svg
-    :target: https://pypi.python.org/pypi/gsheets
+    :target: https://pypi.org/project/gsheets/
     :alt: Format
-.. |Downloads| image:: https://img.shields.io/pypi/dm/gsheets.svg
-    :target: https://pypi.python.org/pypi/gsheets
-    :alt: Downloads
 .. |Docs| image:: https://readthedocs.org/projects/gsheets/badge/?version=stable
     :target: https://gsheets.readthedocs.io/en/stable/
     :alt: Readthedocs
