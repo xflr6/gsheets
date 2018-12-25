@@ -13,8 +13,6 @@ if PY2:
 
     from itertools import imap as map, izip as zip
 
-    open = open
-
     def open_csv(name, mode=None, encoding=None):
         if mode is None:  # pragma: no cover
             mode = ''
@@ -45,8 +43,6 @@ else:
         return iter(d.items())
 
     map, zip = map, zip
-
-    open = open
 
     def open_csv(name, mode=None, encoding=None):
         return open(name, mode, encoding=encoding, newline='')
