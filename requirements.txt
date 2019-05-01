@@ -2,7 +2,7 @@
 -e .[dev,test,docs]
 # exact (transitive) dependency versions used in development
 google-api-python-client==1.7.8
-httplib2==0.12.1
+httplib2==0.12.3
 uritemplate==3.0.0
 six==1.12.0
 oauth2client==4.1.3
