@@ -26,7 +26,7 @@ setup(
     },
     long_description=io.open('README.rst', encoding='utf-8').read(),
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
