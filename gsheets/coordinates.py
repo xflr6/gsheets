@@ -302,7 +302,8 @@ class DoubleSlice(Slice):
         xcol, xrow, col, row = cls._parse(coord.stop)
         if sxcol is not None:
             if xcol is not None:
-                sxcol, sxrow, xcol, xrow = cls._cint(sxcol), cls._rint(sxrow), cls._cint(xcol), cls._rint(xrow)
+                sxcol, sxrow = cls._cint(sxcol), cls._rint(sxrow)
+                xcol, xrow = cls._cint(xcol), cls._rint(xrow)
                 if (sxcol, sxrow) == (xcol, xrow) or sxrow == xrow:
                     return StartCellStopCol(sxcol, sxrow, xcol + 1)
                 elif sxcol == xcol:

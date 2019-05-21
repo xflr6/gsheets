@@ -33,14 +33,16 @@ def pandas(mocker):
     def read_csv(fd, **kwargs):
         kwargs = dict(fd_getvalue=fd.getvalue(), **kwargs)
         return mocker.NonCallableMock(kwargs=kwargs)
-    yield mocker.patch('gsheets.export.pandas', new_callable=mocker.NonCallableMock,
+    yield mocker.patch('gsheets.export.pandas',
+                       new_callable=mocker.NonCallableMock,
                        **{'read_csv.side_effect': read_csv})
 
 
 @pytest.fixture
 def oauth2(mocker):
     kwargs = dict.fromkeys(['file', 'client', 'tools'], mocker.DEFAULT)
-    mocks = mocker.patch.multiple('gsheets.oauth2', new_callable=mocker.NonCallableMock,
+    mocks = mocker.patch.multiple('gsheets.oauth2',
+                                  new_callable=mocker.NonCallableMock,
                                   **kwargs)
 
     yield mocker.NonCallableMock(**mocks)
@@ -49,9 +51,9 @@ def oauth2(mocker):
 @pytest.fixture
 def apiclient(mocker):
     services = {s: mocker.NonCallableMock() for s in ['sheets', 'drive']}
-    build = lambda serviceName, **kwargs: services[serviceName]
-    mocker.patch('gsheets.backend.apiclient.discovery.build', side_effect=build,
-                  new_callable=mocker.Mock)
+    mocker.patch('gsheets.backend.apiclient.discovery.build',
+                 new_callable=mocker.Mock,
+                 side_effect=lambda serviceName, **kwargs: services[serviceName])
 
     yield mocker.NonCallableMock(**services)
 
