@@ -5,7 +5,7 @@ import pytest
 from gsheets import backend
 
 
-def test_build_service(mocker, serviceName='spam', version='v1'):
+def test_build_service(mocker, serviceName='spam', version='v1'):  # noqa: N803
     build = mocker.patch('gsheets.backend.apiclient.discovery.build',
                          new_callable=mocker.Mock)
     backend.build_service(serviceName=serviceName, version=version)

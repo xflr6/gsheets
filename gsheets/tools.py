@@ -7,7 +7,7 @@ __all__ = [
 ]
 
 
-class lazyproperty(object):
+class lazyproperty(object):  # noqa: N801
     """Non-data descriptor caching the computed result as instance attribute.
 
     >>> class Spam(object):
@@ -57,7 +57,7 @@ def doctemplate(*args):
     return decorator
 
 
-class list_view(object):
+class list_view(object):  # noqa: N801
     """Readonly view on a list or sequence.
 
     >>> list_view(['spam'])

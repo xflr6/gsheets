@@ -26,7 +26,7 @@ def build_service(name=None, **kwargs):
     return apiclient.discovery.build(**kwargs)
 
 
-def iterfiles(service, name=None, mimeType=SHEET, order=FILEORDER):
+def iterfiles(service, name=None, mimeType=SHEET, order=FILEORDER):  # noqa: N803
     """Fetch and yield ``(id, name)`` pairs for Google drive files."""
     params = {'orderBy': order, 'pageToken': None}
     q = []

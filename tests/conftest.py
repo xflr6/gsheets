@@ -114,7 +114,7 @@ def spreadsheet(request, apiclient):
 
 @pytest.fixture
 def spreadsheet_values(apiclient, spreadsheet):
-    batchGet = apiclient.sheets.spreadsheets.return_value.values.return_value.batchGet
+    batchGet = apiclient.sheets.spreadsheets.return_value.values.return_value.batchGet  # noqa: N806
     batchGet.return_value.execute.return_value = spreadsheet['values']
 
     yield spreadsheet
