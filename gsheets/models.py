@@ -195,14 +195,14 @@ class SheetsView(tools.list_view):
 
     def __eq__(self, other):
         if isinstance(other, SheetsView):
-            return (self.titles() == other.titles() and  # noqa: W504
-                all(s == o for s, o in zip(self._items, other._items)))
+            return (self.titles() == other.titles()
+                    and all(s == o for s, o in zip(self._items, other._items)))
         return NotImplemented
 
     def __ne__(self, other):
         if isinstance(other, SheetsView):
-            return (self.titles() != other.titles() or  # noqa: W504
-                any(s != o for s, o in zip(self._items, other._items)))
+            return (self.titles() != other.titles()
+                    or any(s != o for s, o in zip(self._items, other._items)))
         return NotImplemented
 
     def __getitem__(self, index):
@@ -257,7 +257,8 @@ class WorkSheet(object):
 
     def __repr__(self):
         return '<%s %d %r (%dx%d)>' % (self.__class__.__name__,
-            self._id, self._title, self.nrows, self.ncols)
+                                       self._id, self._title,
+                                       self.nrows, self.ncols)
 
     def __eq__(self, other):
         if isinstance(other, WorkSheet):
@@ -379,14 +380,12 @@ class WorkSheet(object):
         if filename is None:
             if make_filename is None:
                 make_filename = export.MAKE_FILENAME
-            infos = {
-                'id': self._spreadsheet._id,
-                'title': self._spreadsheet._title,
-                'sheet': self._title,
-                'gid': self._id,
-                'index': self._index,
-                'dialect': dialect,
-            }
+            infos = {'id': self._spreadsheet._id,
+                    'title': self._spreadsheet._title,
+                    'sheet': self._title,
+                    'gid': self._id,
+                    'index': self._index,
+                    'dialect': dialect}
             if isinstance(make_filename, string_types):
                 filename = make_filename % infos
             else:

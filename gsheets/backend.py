@@ -8,10 +8,8 @@ from ._compat import iteritems
 
 __all__ = ['build_service', 'iterfiles', 'spreadsheet', 'values']
 
-SERVICES = {
-    'sheets': {'serviceName': 'sheets', 'version': 'v4'},
-    'drive': {'serviceName': 'drive', 'version': 'v3'},
-}
+SERVICES = {'sheets': {'serviceName': 'sheets', 'version': 'v4'},
+            'drive': {'serviceName': 'drive', 'version': 'v3'}}
 
 SHEET = 'application/vnd.google-apps.spreadsheet'
 
@@ -62,7 +60,8 @@ def spreadsheet(service, id):
 
 def values(service, id, ranges):
     """Fetch and return spreadsheet cell values with Google sheets API."""
-    params = {'majorDimension': 'ROWS', 'valueRenderOption': 'UNFORMATTED_VALUE',
+    params = {'majorDimension': 'ROWS',
+              'valueRenderOption': 'UNFORMATTED_VALUE',
               'dateTimeRenderOption': 'FORMATTED_STRING'}
     params.update(spreadsheetId=id, ranges=ranges)
     response = service.spreadsheets().values().batchGet(**params).execute()

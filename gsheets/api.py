@@ -14,7 +14,8 @@ class Sheets(object):
 
     @classmethod
     @tools.doctemplate(oauth2.SECRETS, oauth2.STORAGE, oauth2.SCOPES)
-    def from_files(cls, secrets=None, storage=None, scopes=None, no_webserver=False):
+    def from_files(cls, secrets=None, storage=None, scopes=None,
+                   no_webserver=False):
         """Return a spreadsheet collection making OAauth 2.0 credentials.
 
         Args:

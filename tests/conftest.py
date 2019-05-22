@@ -73,7 +73,8 @@ def files_name(apiclient, files):
     list_ = apiclient.drive.files.return_value.list
     list_.assert_called_once_with(
         q="name='%s' and mimeType='application/vnd.google-apps.spreadsheet'" % files['files'][0]['name'],
-        orderBy='folder,name,createdTime', pageToken=None)
+        orderBy='folder,name,createdTime',
+        pageToken=None)
     list_.return_value.execute.assert_called_once_with()
 
 
@@ -86,7 +87,8 @@ def files_name_unknown(apiclient, files):
 
     list_.assert_called_once_with(
         q="name='%s' and mimeType='application/vnd.google-apps.spreadsheet'" % files['files'][0]['name'],
-        orderBy='folder,name,createdTime', pageToken=None)
+        orderBy='folder,name,createdTime',
+        pageToken=None)
     list_.return_value.execute.assert_called_once_with()
 
 
@@ -122,5 +124,7 @@ def spreadsheet_values(apiclient, spreadsheet):
     batchGet.assert_called_once_with(
         spreadsheetId=spreadsheet['spreadsheet']['spreadsheetId'],
         ranges=[s['properties']['title'] for s in spreadsheet['spreadsheet']['sheets']],
-        majorDimension='ROWS', valueRenderOption='UNFORMATTED_VALUE', dateTimeRenderOption='FORMATTED_STRING')
+        majorDimension='ROWS',
+        valueRenderOption='UNFORMATTED_VALUE',
+        dateTimeRenderOption='FORMATTED_STRING')
     batchGet.return_value.execute.assert_called_once_with()

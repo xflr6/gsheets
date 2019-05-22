@@ -18,7 +18,8 @@ def test_iterfiles(apiclient):
     list_ = apiclient.drive.files.return_value.list
     list_.assert_called_once_with(
         q="mimeType='application/vnd.google-apps.spreadsheet'",
-        orderBy='folder,name,createdTime', pageToken=None)
+        orderBy='folder,name,createdTime',
+        pageToken=None)
     list_.return_value.execute.assert_called_once_with()
 
 
@@ -26,5 +27,6 @@ def test_iterfiles(apiclient):
 def test_iterfiles_nomime(apiclient):
     assert sum(1 for _ in backend.iterfiles(apiclient.drive, mimeType=None)) == 1
     list_ = apiclient.drive.files.return_value.list
-    list_.assert_called_once_with(orderBy='folder,name,createdTime', pageToken=None)
+    list_.assert_called_once_with(orderBy='folder,name,createdTime',
+                                  pageToken=None)
     list_.return_value.execute.assert_called_once_with()

@@ -75,13 +75,13 @@ class Coordinates(object):
     """
 
     _regex = re.compile(r'(?i)'
-        r'\s*(?:'
-        r'(?:(?P<xcol>[A-Z])(?P<xrow>[1-9][0-9]*))'
-        r'|'
-        r'(?P<col>[A-Z])'
-        r'|'
-        r'(?P<row>[1-9][0-9]*)'
-        r')\s*$')
+                        r'\s*(?:'
+                        r'(?:(?P<xcol>[A-Z])(?P<xrow>[1-9][0-9]*))'
+                        r'|'
+                        r'(?P<col>[A-Z])'
+                        r'|'
+                        r'(?P<row>[1-9][0-9]*)'
+                        r')\s*$')
 
     @staticmethod
     def _parse(coord, _match=_regex.match):

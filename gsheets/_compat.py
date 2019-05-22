@@ -23,7 +23,8 @@ if PY2:
 
     def csv_writerows(csvwriter, rows, encoding):
         for r in rows:
-            data = [(u'%s' % c).encode(encoding) if c is not None else c for c in r]
+            data = [(u'%s' % c).encode(encoding) if c is not None else c
+                    for c in r]
             csvwriter.writerow(data)
 
     try:

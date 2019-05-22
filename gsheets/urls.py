@@ -40,7 +40,8 @@ class SheetUrl(object):
         self.gid = gid
 
     def __repr__(self):
-        return '<%s id=%r gid=%d>' % (self.__class__.__name__, self.id, self.gid)
+        return '<%s id=%r gid=%d>' % (self.__class__.__name__,
+                                      self.id, self.gid)
 
     def to_string(self, gid=None):
         """
