@@ -11,7 +11,8 @@ if PY2:
     def iteritems(d):
         return d.iteritems()
 
-    from itertools import imap as map, izip as zip
+    from itertools import (imap as map,
+                           izip as zip)
 
     def open_csv(name, mode=None, encoding=None):
         if mode is None:  # pragma: no cover
