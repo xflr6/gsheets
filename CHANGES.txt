@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-Version 0.3.2 (in development)
-------------------------------
+Version 0.3.2
+-------------
 
 Drop Python 3.4 support.
 
