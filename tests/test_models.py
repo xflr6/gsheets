@@ -113,7 +113,7 @@ class TestSpreadSheet(object):
         assert sheet.first_sheet is sheet.sheets[0]
 
     def test_to_csv(self, mocker, sheet):
-        ws = mocker.NonCallableMock()
+        ws = mocker.create_autospec(gsheets.models.WorkSheet, instance=True)
         mocker.patch.object(sheet, '_sheets', **{'__iter__.return_value': [ws]})
         args = [getattr(mocker.sentinel, s)
                 for s in ('encoding', 'dialect', 'make_filename')]

@@ -6,9 +6,11 @@ from gsheets import backend
 
 
 def test_build_service(mocker, serviceName='spam', version='v1'):  # noqa: N803
-    build = mocker.patch('apiclient.discovery.build',
-                         new_callable=mocker.Mock)
-    backend.build_service(serviceName=serviceName, version=version)
+    build = mocker.patch('apiclient.discovery.build', autospec=True)
+
+    result = backend.build_service(serviceName=serviceName, version=version)
+
+    assert result is build.return_value
     build.assert_called_once_with(serviceName=serviceName, version=version)
 
 

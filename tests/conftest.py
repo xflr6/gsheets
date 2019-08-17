@@ -4,6 +4,8 @@ import sys
 
 import pytest
 
+import oauth2client
+
 FILES = {'files': [{'id': 'spam', 'name': 'Spam'}]}
 
 SPREADSHEET = {
@@ -34,26 +36,23 @@ def pandas(mocker):
     def read_csv(fd, **kwargs):
         kwargs = dict(fd_getvalue=fd.getvalue(), **kwargs)
         return mocker.NonCallableMock(kwargs=kwargs)
-    yield mocker.patch('gsheets.export.pandas',
-                       new_callable=mocker.NonCallableMock,
+    yield mocker.patch('gsheets.export.pandas', autospec=True,
                        **{'read_csv.side_effect': read_csv})
 
 
 @pytest.fixture
 def oauth2(mocker):
-    kwargs = dict.fromkeys(['file', 'client', 'tools'], mocker.DEFAULT)
-    mocks = mocker.patch.multiple('gsheets.oauth2',
-                                  new_callable=mocker.NonCallableMock,
-                                  **kwargs)
+    module = mocker.create_autospec(oauth2client, name='oauth2client')
+    mocker.patch.multiple('gsheets.oauth2', file=module.file,
+                          client=module.client, tools=module.tools)
 
-    yield mocker.NonCallableMock(**mocks)
+    yield module
 
 
 @pytest.fixture
 def apiclient(mocker):
-    services = {s: mocker.NonCallableMock() for s in ['sheets', 'drive']}
-    mocker.patch('apiclient.discovery.build',
-                 new_callable=mocker.Mock,
+    services = {s: mocker.NonCallableMock(name=s) for s in ['sheets', 'drive']}
+    mocker.patch('apiclient.discovery.build', autospec=True,
                  side_effect=lambda serviceName, **kwargs: services[serviceName])
 
     yield mocker.NonCallableMock(**services)
