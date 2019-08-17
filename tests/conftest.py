@@ -50,27 +50,27 @@ def oauth2(mocker):
 
 
 @pytest.fixture
-def apiclient(mocker):
+def services(mocker):
     services = {s: mocker.NonCallableMock(name=s) for s in ['sheets', 'drive']}
     mocker.patch('apiclient.discovery.build', autospec=True,
                  side_effect=lambda serviceName, **kwargs: services[serviceName])
 
-    yield mocker.NonCallableMock(**services)
+    yield mocker.NonCallableMock(name='services', **services)
 
 
 @pytest.fixture
-def files(request, apiclient):
+def files(request, services):
     files = getattr(request.module, 'FILES', FILES)
-    apiclient.drive.files.return_value.list.return_value.execute.return_value = files
+    services.drive.files.return_value.list.return_value.execute.return_value = files
 
     yield files
 
 
 @pytest.fixture
-def files_name(apiclient, files):
+def files_name(services, files):
     yield files
 
-    list_ = apiclient.drive.files.return_value.list
+    list_ = services.drive.files.return_value.list
     list_.assert_called_once_with(
         q="name='%s' and mimeType='application/vnd.google-apps.spreadsheet'" % files['files'][0]['name'],
         orderBy='folder,name,createdTime',
@@ -79,8 +79,8 @@ def files_name(apiclient, files):
 
 
 @pytest.fixture
-def files_name_unknown(apiclient, files):
-    list_ = apiclient.drive.files.return_value.list
+def files_name_unknown(services, files):
+    list_ = services.drive.files.return_value.list
     list_.return_value.execute.return_value = {'files': []}
 
     yield files
@@ -93,18 +93,18 @@ def files_name_unknown(apiclient, files):
 
 
 @pytest.fixture
-def spreadsheet_404(mocker, apiclient):
+def spreadsheet_404(mocker, services):
     from apiclient.errors import HttpError
     http404 = HttpError(resp=mocker.NonCallableMock(status=404), content=b'')
-    apiclient.sheets.spreadsheets.return_value.get.return_value.execute.side_effect = http404
+    services.sheets.spreadsheets.return_value.get.return_value.execute.side_effect = http404
 
     yield http404
 
 
 @pytest.fixture
-def spreadsheet(request, apiclient):
+def spreadsheet(request, services):
     spreadsheet = getattr(request.module, 'SPREADSHEET', SPREADSHEET)
-    get = apiclient.sheets.spreadsheets.return_value.get
+    get = services.sheets.spreadsheets.return_value.get
     get.return_value.execute.return_value = spreadsheet['spreadsheet']
 
     yield spreadsheet
@@ -115,8 +115,8 @@ def spreadsheet(request, apiclient):
 
 
 @pytest.fixture
-def spreadsheet_values(apiclient, spreadsheet):
-    batchGet = apiclient.sheets.spreadsheets.return_value.values.return_value.batchGet  # noqa: N806
+def spreadsheet_values(services, spreadsheet):
+    batchGet = services.sheets.spreadsheets.return_value.values.return_value.batchGet  # noqa: N806
     batchGet.return_value.execute.return_value = spreadsheet['values']
 
     yield spreadsheet
