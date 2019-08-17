@@ -24,8 +24,9 @@ def py2():
 
 
 @pytest.fixture
-def open_(mocker):
-    yield mocker.patch('gsheets._compat.open', mocker.mock_open())
+def open_(mocker, py2):
+    target = '__builtin__.open' if py2 else 'builtins.open'
+    yield mocker.patch(target, mocker.mock_open())
 
 
 @pytest.fixture
@@ -51,7 +52,7 @@ def oauth2(mocker):
 @pytest.fixture
 def apiclient(mocker):
     services = {s: mocker.NonCallableMock() for s in ['sheets', 'drive']}
-    mocker.patch('gsheets.backend.apiclient.discovery.build',
+    mocker.patch('apiclient.discovery.build',
                  new_callable=mocker.Mock,
                  side_effect=lambda serviceName, **kwargs: services[serviceName])
 
