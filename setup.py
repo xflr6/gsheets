@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='gsheets',
-    version='0.3.3.dev0',
+    version='0.4.dev0',
     author='Sebastian Bank',
     author_email='sebastian.bank@uni-leipzig.de',
     description='Pythonic wrapper for the Google Sheets API',
