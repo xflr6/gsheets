@@ -393,14 +393,16 @@ class WorkSheet(object):
         with export.open_csv(filename, 'w', encoding=encoding) as fd:
             export.write_csv(fd, self._values, encoding, dialect)
 
-    def to_frame(self, **kwargs):
+    def to_frame(self, assign_name=False, **kwargs):
         r"""Return a pandas DataFrame loaded from the worksheet data.
 
         Args:
+            assign_name (bool): set name attribute on the DataFrame to sheet title.
             \**kwargs: passed to ``pandas.read_csv()`` (e.g. ``header``, ``index_col``)
         Returns:
             pandas.DataFrame: new ``DataFrame`` instance
         """
         df = export.write_dataframe(self._values, **kwargs)
-        df.name = self.title
+        if assign_name:
+            df.name = self.title
         return df

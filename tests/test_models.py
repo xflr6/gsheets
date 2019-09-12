@@ -236,7 +236,7 @@ class TestWorkSheet(object):
         assert open_.return_value.write.call_args_list == [((a,),) for a in write_args]
 
     def test_to_frame(self, mocker, py2, pandas, ws):
-        mf = ws.to_frame()
+        mf = ws.to_frame(assign_name=True)
         encoding = 'utf-8' if py2 else None
         pandas.read_csv.assert_called_once_with(mocker.ANY, encoding=encoding,
                                                 dialect='excel')
@@ -244,7 +244,7 @@ class TestWorkSheet(object):
         assert mf.name == 'Spam1'
 
     def test_to_frame_nonascii(self, mocker, py2, pandas, ws_nonascii):
-        mf = ws_nonascii.to_frame()
+        mf = ws_nonascii.to_frame(assign_name=True)
         encoding = 'utf-8' if py2 else None
         pandas.read_csv.assert_called_once_with(mocker.ANY, encoding=encoding,
                                                 dialect='excel')
