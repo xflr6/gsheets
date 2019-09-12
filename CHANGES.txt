@@ -5,7 +5,8 @@ Changelog
 Version 0.4 (in development)
 ----------------------------
 
-
+Change ws.to_frame() method to make assignment of worksheet title to ``name``
+attribute of ``pandas.DataFrame`` opt-in by ``assign_name`` kwarg.
 
 
 Version 0.3.2
