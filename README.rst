@@ -117,7 +117,7 @@ worksheet title):
 
 .. code:: python
 
-    >>> csv_name = lambda title, sheet, dialect: '%s - %s.csv' % (title, sheet)
+    >>> csv_name = lambda infos: '%(title)s - %(sheet)s.csv' % infos
     >>> s.to_csv(make_filename=csv_name)
 
 Load the worksheet data into a pandas DataFrame (requires ``pandas``):
