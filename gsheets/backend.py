@@ -36,7 +36,8 @@ def iterfiles(service, name=None, mimeType=SHEET, order=FILEORDER):  # noqa: N80
         params['q'] = ' and '.join(q)
 
     while True:
-        response = service.files().list(**params).execute()
+        request = service.files().list(**params)
+        response = request.execute()
         for f in response['files']:
             yield f['id'], f['name']
         try:
@@ -62,7 +63,9 @@ def values(service, id, ranges):
     """Fetch and return spreadsheet cell values with Google sheets API."""
     params = {'majorDimension': 'ROWS',
               'valueRenderOption': 'UNFORMATTED_VALUE',
-              'dateTimeRenderOption': 'FORMATTED_STRING'}
-    params.update(spreadsheetId=id, ranges=ranges)
-    response = service.spreadsheets().values().batchGet(**params).execute()
+              'dateTimeRenderOption': 'FORMATTED_STRING',
+              'spreadsheetId': id,
+              'ranges': ranges}
+    request = service.spreadsheets().values().batchGet(**params)
+    response = request.execute()
     return response['valueRanges']
