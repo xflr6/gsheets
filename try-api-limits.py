@@ -1,0 +1,19 @@
+#!/usr/bin/env python
+# try-api-limits.py - investigate api limits with larger sheets
+
+import logging
+
+from gsheets import Sheets
+
+SHEET_ID = '1lnDyc-Elf_y6_Bz22_9AgTKu4aJCFUoBuPCaxyAFMkA'
+
+
+logging.basicConfig(format='[%(levelname)s@%(name)s] %(message)s',
+                    level=logging.DEBUG)
+
+sheets = Sheets.from_files('~/client_secrets.json', 'storage.json')
+
+s = sheets[SHEET_ID]
+
+for w in s.sheets:
+    print(w.title, w.nrows, w.ncols, sep='\t')
