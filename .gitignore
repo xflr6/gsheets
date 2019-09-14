@@ -17,4 +17,5 @@ __pycache__/
 
 Thumbs.db
 
-/Spam - *.csv
+/storage.json
+/*.csv
