@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # try-api-limits.py - investigate api limits with larger sheets
 
+from __future__ import print_function
+
 import logging
 
 from gsheets import Sheets
