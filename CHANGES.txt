@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-Version 0.4.1 (in development)
-------------------------------
+Version 0.4.1
+-------------
 
 Fix documentation example of make_filename.
 
