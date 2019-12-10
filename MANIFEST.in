@@ -1,6 +1,6 @@
 include README.rst LICENSE.txt CHANGES.txt
 include requirements.txt
-include run-tests.py
+include run-tests.py try-example.py try-api-limits.py
 include tox.ini
 recursive-include tests *.py
 recursive-include docs *.rst *.txt *.py *.png
