@@ -5,7 +5,9 @@ Changelog
 Version 0.4.1 (in development)
 ------------------------------
 
-Tag Python 3.7 support.
+Fix documentation example of make_filename.
+
+Tag Python 3.7 and 3.8 support.
 
 
 Version 0.4
