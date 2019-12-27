@@ -231,7 +231,7 @@ class TestWorkSheet(object):
         if py2:
             write_calls = [mocker.call(b'Sp\xc3\xa4m,Eggs\r\n'), mocker.call(b',1\r\n')]
         else:
-            write_calls = [mocker.call(u'Sp\xe4m,Eggs\r\n'), mocker,call(u',1\r\n')]
+            write_calls = [mocker.call(u'Sp\xe4m,Eggs\r\n'), mocker.call(u',1\r\n')]
         assert open_.return_value.write.call_args_list == write_calls
 
     @staticmethod
