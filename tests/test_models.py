@@ -207,33 +207,42 @@ class TestWorkSheet(object):
     def test_ncells(self, ws):
         assert ws.ncells == 4
 
-    def test_to_csv(self, py2, open_, ws):
+    def test_to_csv(self, mocker, py2, open_, ws):
         ws.to_csv(make_filename=None)
-        self._assert_open(py2, open_, 'Spam - Spam1.csv', 'utf-8',
-                          ['1,2\r\n', '3,4\r\n'])
+        self._assert_open(py2, open_, 'Spam - Spam1.csv', 'utf-8')
+        write_calls = [mocker.call('1,2\r\n'), mocker.call('3,4\r\n')]
+        assert open_.return_value.write.call_args_list == write_calls
 
-    def test_to_csv_filename(self, py2, open_, ws):
+    def test_to_csv_filename(self, mocker, py2, open_, ws):
         ws.to_csv(filename='Spam.csv')
-        self._assert_open(py2, open_, 'Spam.csv', 'utf-8',
-                          ['1,2\r\n', '3,4\r\n'])
+        self._assert_open(py2, open_, 'Spam.csv', 'utf-8')
+        write_calls = [mocker.call('1,2\r\n'), mocker.call('3,4\r\n')]
+        assert open_.return_value.write.call_args_list == write_calls
 
-    def test_to_csv_func(self, py2, open_, ws):
+    def test_to_csv_func(self, mocker, py2, open_, ws):
         ws.to_csv(make_filename=lambda infos: '%(title)s-%(index)s-%(sheet)s.csv' % infos)
-        self._assert_open(py2, open_, 'Spam-0-Spam1.csv', 'utf-8',
-                          ['1,2\r\n', '3,4\r\n'])
+        self._assert_open(py2, open_, 'Spam-0-Spam1.csv', 'utf-8')
+        write_calls = [mocker.call('1,2\r\n'), mocker.call('3,4\r\n')]
+        assert open_.return_value.write.call_args_list == write_calls
 
-    def test_to_csv_nonascii(self, py2, open_, ws_nonascii):
+    def test_to_csv_nonascii(self, mocker, py2, open_, ws_nonascii):
         ws_nonascii.to_csv()
-        write_args = ['Sp\xc3\xa4m,Eggs\r\n', ',1\r\n'] if py2 else [u'Sp\xe4m,Eggs\r\n', u',1\r\n']
-        self._assert_open(py2, open_, 'Spam - Spam1.csv', 'utf-8', write_args)
+        self._assert_open(py2, open_, 'Spam - Spam1.csv', 'utf-8')
+        if py2:
+            write_calls = [mocker.call(b'Sp\xc3\xa4m,Eggs\r\n'), mocker.call(b',1\r\n')]
+        else:
+            write_calls = [mocker.call(u'Sp\xe4m,Eggs\r\n'), mocker,call(u',1\r\n')]
+        assert open_.return_value.write.call_args_list == write_calls
 
     @staticmethod
-    def _assert_open(py2, open_, filename, encoding, write_args):
+    def _assert_open(py2, open_, filename, encoding):
+        args, kwargs = [filename], {}
         if py2:
-            open_.assert_called_once_with(filename, 'wb')
+            args.append('wb')
         else:
-            open_.assert_called_once_with(filename, 'w', encoding=encoding, newline='')
-        assert open_.return_value.write.call_args_list == [((a,),) for a in write_args]
+            args.append('w')
+            kwargs.update(encoding=encoding, newline='')
+        open_.assert_called_once_with(*args, **kwargs)
 
     def test_to_frame(self, mocker, py2, pandas, ws):
         mf = ws.to_frame(assign_name=True)
