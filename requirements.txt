@@ -3,7 +3,7 @@
 # exact (transitive) dependency versions used in development
 google-api-python-client==1.7.11
 httplib2==0.15.0
-uritemplate==3.0.0
+uritemplate==3.0.1
 six==1.12.0
 oauth2client==4.1.3
 rsa==4.0
