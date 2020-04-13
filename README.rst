@@ -1,9 +1,9 @@
 gsheets
 =======
 
-|PyPI version| |License| |Supported Python| |Format| |Docs|
+|PyPI version| |License| |Supported Python| |Format|
 
-|Travis| |Codecov|
+|Travis| |Codecov| |Readthedocs-stable| |Readthedocs-latest|
 
 ``gsheets`` is a small wrapper around the `Google Sheets API`_ (v4) to provide
 more convenient access to `Google Sheets`_ from Python scripts.
@@ -201,12 +201,16 @@ This package is distributed under the `MIT license`_.
 .. |Format| image:: https://img.shields.io/pypi/format/gsheets.svg
     :target: https://pypi.org/project/gsheets/
     :alt: Format
-.. |Docs| image:: https://readthedocs.org/projects/gsheets/badge/?version=stable
-    :target: https://gsheets.readthedocs.io/en/stable/
-    :alt: Readthedocs
+
 .. |Travis| image:: https://img.shields.io/travis/xflr6/gsheets.svg
     :target: https://travis-ci.org/xflr6/gsheets
     :alt: Travis
 .. |Codecov| image:: https://codecov.io/gh/xflr6/gsheets/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/xflr6/gsheets
     :alt: Codecov
+.. |Readthedocs-stable| image:: https://readthedocs.org/projects/gsheets/badge/?version=stable
+    :target: https://gsheets.readthedocs.io/en/stable/?badge=stable
+    :alt: Readthedocs stable
+.. |Readthedocs-latest| image:: https://readthedocs.org/projects/gsheets/badge/?version=latest
+    :target: https://gsheets.readthedocs.io/en/latest/?badge=latest
+    :alt: Readthedocs latest
