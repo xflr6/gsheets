@@ -1,5 +1,5 @@
 version: ~> 1.0
-dist: beaver
+dist: bionic
 language: python
 cache: pip
 python:
