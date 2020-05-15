@@ -1,8 +1,8 @@
 # development environment: install in development mode
 -e .[dev,test,docs]
 # exact (transitive) dependency versions used in development
-google-api-python-client==1.8.0
-httplib2==0.17.0
+google-api-python-client==1.8.3
+httplib2==0.17.3
 uritemplate==3.0.1
 six==1.14.0
 oauth2client==4.1.3
