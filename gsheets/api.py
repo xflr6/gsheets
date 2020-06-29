@@ -10,7 +10,9 @@ __all__ = ['Sheets']
 
 
 class Sheets(object):
-    """Collection of spreadsheets available from given OAuth 2.0 credentials."""
+    """Collection of spreadsheets available from given OAuth 2.0 credentials
+    or API key.
+    """
 
     @classmethod
     @tools.doctemplate(oauth2.SECRETS, oauth2.STORAGE, oauth2.SCOPES)
@@ -29,18 +31,33 @@ class Sheets(object):
         creds = oauth2.get_credentials(scopes, secrets, storage, no_webserver)
         return cls(creds)
 
-    def __init__(self, credentials):
+    def __init__(self, credentials=None, developer_key=None):
+        """To access private data, you must provide OAuth2 credentials with
+        access to the resource.
+
+        To access public data, you may provide either an API key or
+        OAuth2 credentials.
+
+        Args:
+            credentials (google.oauth2.credentials.Credentials):
+                OAauth 2.0 credentials
+            developer_key (str): Google API key authorized for Drive
+                and Sheets APIs
+        """
         self._creds = credentials
+        self._key = developer_key
 
     @tools.lazyproperty
     def _sheets(self):
         """Google sheets API service endpoint (v4)."""
-        return backend.build_service('sheets', credentials=self._creds)
+        return backend.build_service('sheets', credentials=self._creds,
+                                     developerKey=self._key)
 
     @tools.lazyproperty
     def _drive(self):
         """Google drive API service endpoint (v3)."""
-        return backend.build_service('drive', credentials=self._creds)
+        return backend.build_service('drive', credentials=self._creds,
+                                     developerKey=self._key)
 
     def __len__(self):
         """Return the number of available spreadsheets.

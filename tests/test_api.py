@@ -22,6 +22,7 @@ def test_from_files(oauth2):
         oauth2.tools.argparser.parse_args.return_value)
     assert isinstance(sheets, gsheets.Sheets)
     assert sheets._creds is oauth2.tools.run_flow.return_value
+    assert sheets._key is None
 
 
 def test_from_files_cached(oauth2):
@@ -31,6 +32,14 @@ def test_from_files_cached(oauth2):
 
     assert isinstance(sheets, gsheets.Sheets)
     assert sheets._creds is oauth2.file.Storage.return_value.get.return_value
+    assert sheets._key is None
+
+
+def test_key():
+    sheets = gsheets.Sheets(developer_key='key')
+
+    assert isinstance(sheets, gsheets.Sheets)
+    assert sheets._key == 'key'
 
 
 @pytest.mark.usefixtures('files')
