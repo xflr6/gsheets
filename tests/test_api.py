@@ -36,8 +36,6 @@ def test_from_files_cached(oauth2):
 
 
 def test_from_key():
-    oauth2.file.Storage.return_value.get.return_value = None
-
     sheets = gsheets.Sheets.from_key('')
 
     assert isinstance(sheets, gsheets.Sheets)
