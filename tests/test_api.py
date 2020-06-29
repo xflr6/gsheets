@@ -35,7 +35,7 @@ def test_from_files_cached(oauth2):
     assert sheets._key is None
 
 
-def test_from_key(key):
+def test_from_key():
     oauth2.file.Storage.return_value.get.return_value = None
 
     sheets = gsheets.Sheets.from_key('')
