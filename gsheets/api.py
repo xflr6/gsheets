@@ -10,7 +10,9 @@ __all__ = ['Sheets']
 
 
 class Sheets(object):
-    """Collection of spreadsheets available from given OAuth 2.0 credentials."""
+    """Collection of spreadsheets available from given OAuth 2.0 credentials
+    or API key.
+    """
 
     @classmethod
     @tools.doctemplate(oauth2.SECRETS, oauth2.STORAGE, oauth2.SCOPES)
@@ -29,20 +31,21 @@ class Sheets(object):
         creds = oauth2.get_credentials(scopes, secrets, storage, no_webserver)
         return cls(creds)
 
-    @classmethod
-    def from_key(cls, key):
-        """Return a spreadsheet collection using an API key.
+    def __init__(self, credentials=None, developer_key=None):
+        """To access private data, you must provide OAuth2 credentials with
+        access to the resource.
+
+        To access public data, you may provide either an API key or
+        OAuth2 credentials.
 
         Args:
-            key (str): Google API key authorized for Drive and Sheets APIs
-        Returns:
-            Sheets: new Sheets instance using the specified key
+            credentials (google.oauth2.credentials.Credentials):
+                OAauth 2.0 credentials
+            developer_key (str): Google API key authorized for Drive
+                and Sheets APIs
         """
-        return cls(None, key=key)
-
-    def __init__(self, credentials, key=None):
         self._creds = credentials
-        self._key = key
+        self._key = developer_key
 
     @tools.lazyproperty
     def _sheets(self):
