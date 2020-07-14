@@ -6,9 +6,9 @@ import gsheets
 
 
 @pytest.fixture
-def sheet(spreadsheet_values):
+def sheet(mocker, spreadsheet_values):
     id = spreadsheet_values['spreadsheet']['spreadsheetId']
-    yield gsheets.Sheets(credentials=None)[id]
+    yield gsheets.Sheets(credentials=mocker.sentinel.credentials)[id]
 
 
 @pytest.fixture

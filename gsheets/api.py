@@ -44,6 +44,9 @@ class Sheets(object):
             developer_key (str): Google API key authorized for Drive
                 and Sheets APIs
         """
+        if credentials is None and developer_key is None:
+            raise ValueError('need credentials or developer_key')
+
         self._creds = credentials
         self._developer_key = developer_key
 

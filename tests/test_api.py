@@ -6,8 +6,8 @@ import gsheets
 
 
 @pytest.fixture
-def sheets():
-    return gsheets.Sheets(credentials=None)
+def sheets(mocker):
+    return gsheets.Sheets(credentials=mocker.sentinel.credentials)
 
 
 def test_from_files(oauth2):
@@ -35,7 +35,12 @@ def test_from_files_cached(oauth2):
     assert sheets._developer_key is None
 
 
-def test_key(mocker):
+def test_init_fail():
+    with pytest.raises(ValueError):
+        gsheets.Sheets()
+
+
+def test_init_developer_key(mocker):
     sheets = gsheets.Sheets(developer_key=mocker.sentinel.developer_key)
 
     assert isinstance(sheets, gsheets.Sheets)
