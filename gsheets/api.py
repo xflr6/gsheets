@@ -45,19 +45,19 @@ class Sheets(object):
                 and Sheets APIs
         """
         self._creds = credentials
-        self._key = developer_key
+        self._developer_key = developer_key
 
     @tools.lazyproperty
     def _sheets(self):
         """Google sheets API service endpoint (v4)."""
         return backend.build_service('sheets', credentials=self._creds,
-                                     developerKey=self._key)
+                                     developerKey=self._developer_key)
 
     @tools.lazyproperty
     def _drive(self):
         """Google drive API service endpoint (v3)."""
         return backend.build_service('drive', credentials=self._creds,
-                                     developerKey=self._key)
+                                     developerKey=self._developer_key)
 
     def __len__(self):
         """Return the number of available spreadsheets.
