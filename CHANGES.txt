@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-Version 0.4.2 (in development)
-------------------------------
+Version 0.5 (in development)
+----------------------------
 
 
 
