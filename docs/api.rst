@@ -20,7 +20,7 @@ Sheets
 
 .. autoclass:: gsheets.Sheets
     :members:
-        from_files,
+        from_files, from_developer_key,
         __len__, __iter__, __contains__, __getitem__, get,
         find, findall,
         iterfiles, ids, titles

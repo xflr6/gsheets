@@ -31,6 +31,17 @@ class Sheets(object):
         creds = oauth2.get_credentials(scopes, secrets, storage, no_webserver)
         return cls(creds)
 
+    @classmethod
+    def from_developer_key(cls, developer_key):
+        """Return a spreadsheet collection using an API key.
+
+        Args:
+            developer_key (str): Google API key authorized for Drive and Sheets APIs
+        Returns:
+            Sheets: new Sheets instance using the specified key
+        """
+        return cls(credentials=None, developer_key=developer_key)
+
     def __init__(self, credentials=None, developer_key=None):
         """To access private data, you must provide OAuth2 credentials with
         access to the resource.
@@ -43,6 +54,8 @@ class Sheets(object):
                 OAauth 2.0 credentials
             developer_key (str): Google API key authorized for Drive
                 and Sheets APIs
+        Raises:
+            ValueEreror: If both ``credentials`` and ``developer_key`` are ``None``.
         """
         if credentials is None and developer_key is None:
             raise ValueError('need credentials or developer_key')

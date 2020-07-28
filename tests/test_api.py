@@ -35,6 +35,14 @@ def test_from_files_cached(oauth2):
     assert sheets._developer_key is None
 
 
+def test_from_developer_key(mocker):
+    sheets = gsheets.Sheets.from_developer_key(mocker.sentinel.developer_key)
+
+    assert isinstance(sheets, gsheets.Sheets)
+    assert sheets._creds is None
+    assert sheets._developer_key == mocker.sentinel.developer_key
+
+
 def test_init_fail():
     with pytest.raises(ValueError):
         gsheets.Sheets()
@@ -44,6 +52,7 @@ def test_init_developer_key(mocker):
     sheets = gsheets.Sheets(developer_key=mocker.sentinel.developer_key)
 
     assert isinstance(sheets, gsheets.Sheets)
+    assert sheets._creds is None
     assert sheets._developer_key == mocker.sentinel.developer_key
 
 
