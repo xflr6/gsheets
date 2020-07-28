@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+Version 0.5.1 (in development)
+------------------------------
+
+
+
+
 Version 0.5
 -----------
 
@@ -12,7 +18,6 @@ https://developers.google.com/sheets/api/guides/authorizing (PR Natarajan
 Krishnaswami).
 
 Improve test and doc building config.
-
 
 
 Version 0.4.1
