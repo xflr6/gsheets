@@ -2,9 +2,16 @@ Changelog
 =========
 
 
-Version 0.5 (in development)
-----------------------------
+Version 0.5
+-----------
 
+Add support for API key auth: add optional ``developer_key`` argument to
+``Sheets`` constructor and alternate ``Sheets.from_developer_key()``
+constructor, see also
+https://developers.google.com/sheets/api/guides/authorizing (PR Natarajan
+Krishnaswami).
+
+Improve test and doc building config.
 
 
 
