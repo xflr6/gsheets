@@ -21,6 +21,16 @@ def build_service(name=None, **kwargs):
     if name is not None:
         for kw, value in iteritems(SERVICES[name]):
             kwargs.setdefault(kw, value)
+    if 'cache_discovery' not in kwargs:
+        try:
+            from oauth2client import __version__ as o2c_version
+        except ImportError:  # pragma: no cover
+            pass
+        else:
+            # ImportError: file_cache is unavailable when using oauth2client >= 4.0.0 or google-auth
+            if o2c_version == '4' or o2c_version.startswith('4.'):
+                kwargs['cache_discovery'] = False
+
     return apiclient.discovery.build(**kwargs)
 
 

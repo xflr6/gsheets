@@ -11,7 +11,13 @@ def test_build_service(mocker, serviceName='spam', version='v1'):  # noqa: N803
     result = backend.build_service(serviceName=serviceName, version=version)
 
     assert result is build.return_value
-    build.assert_called_once_with(serviceName=serviceName, version=version)
+
+    from oauth2client import __version__ as o2c_version
+
+    o2c_v4 = (o2c_version == '4' or o2c_version.startswith('4.'))
+
+    build.assert_called_once_with(serviceName=serviceName, version=version,
+                                  cache_discovery=not o2c_v4)
 
 
 @pytest.mark.usefixtures('files')
