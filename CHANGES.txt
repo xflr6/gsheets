@@ -10,7 +10,7 @@ Version 0.5.2 (in development)
 Version 0.5.1
 -------------
 
-Avoid `file_cache` import warning with oauth2client >= 4.
+Avoid ``file_cache`` import warning with oauth2client >= 4.
 
 
 Version 0.5
@@ -28,7 +28,7 @@ Improve test and doc building config.
 Version 0.4.1
 -------------
 
-Fix documentation example of make_filename.
+Fix documentation example of ``make_filename``.
 
 Tag Python 3.7 and 3.8 support.
 
@@ -36,7 +36,7 @@ Tag Python 3.7 and 3.8 support.
 Version 0.4
 -----------
 
-Change ws.to_frame() method to make assignment of worksheet title to ``name``
+Change ``ws.to_frame()`` method to make assignment of worksheet title to ``name``
 attribute of ``pandas.DataFrame`` opt-in by ``assign_name`` kwarg.
 
 
