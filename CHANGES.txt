@@ -2,10 +2,10 @@ Changelog
 =========
 
 
-Version 0.5.1 (in development)
-------------------------------
+Version 0.5.1
+-------------
 
-
+Avoid `file_cache` import warning with oauth2client >= 4.
 
 
 Version 0.5
