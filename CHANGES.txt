@@ -4,7 +4,7 @@ Changelog
 Version 0.5.2 (in development)
 ------------------------------
 
-Drop Python 3.5 support.
+Drop Python 3.5 support and tag Python 3.9 support.
 
 
 Version 0.5.1
