@@ -15,6 +15,7 @@ WORKSHEET_NAMES = ['Tabellenblatt1', 'Tabellenblatt2', 'Tabellenblatt3']
 logging.basicConfig(format='[%(levelname)s@%(name)s] %(message)s',
                     level=logging.INFO)
 
+
 sheets = Sheets.from_files('~/client_secrets.json', '~/gsheets-storage.json')
 
 print(sheets[SHEET_ID])

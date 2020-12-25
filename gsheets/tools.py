@@ -2,9 +2,11 @@
 
 import collections
 
-__all__ = [
-    'lazyproperty', 'doctemplate', 'list_view', 'eval_source', 'uniqued',
-]
+__all__ = ['lazyproperty',
+           'doctemplate',
+           'list_view',
+           'eval_source',
+           'uniqued']
 
 
 class lazyproperty(object):  # noqa: N801

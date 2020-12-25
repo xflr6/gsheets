@@ -13,6 +13,7 @@ SHEET_ID = '1lnDyc-Elf_y6_Bz22_9AgTKu4aJCFUoBuPCaxyAFMkA'
 logging.basicConfig(format='[%(levelname)s@%(name)s] %(message)s',
                     level=logging.DEBUG)
 
+
 sheets = Sheets.from_files('~/client_secrets.json', '~/gsheets-storage.json')
 
 s = sheets[SHEET_ID]

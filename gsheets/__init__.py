@@ -3,8 +3,8 @@
 """Google docs spreadsheets as Python objects."""
 
 from .api import Sheets
-from .oauth2 import get_credentials
 from .backend import build_service
+from .oauth2 import get_credentials
 
 __all__ = ['Sheets', 'get_credentials', 'build_service']
 

@@ -2,8 +2,8 @@
 
 """Dump spreadsheet values to CSV files and pandas DataFrames."""
 
-import csv
 import contextlib
+import csv
 
 from ._compat import open_csv, csv_writerows, CsvBuffer, read_csv
 

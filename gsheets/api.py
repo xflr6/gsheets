@@ -2,7 +2,11 @@
 
 """Main interface for the library user."""
 
-from . import oauth2, backend, models, urls, tools
+from . import backend
+from . import models
+from . import oauth2
+from . import tools
+from . import urls
 
 __all__ = ['Sheets']
 

@@ -6,9 +6,9 @@ import os
 
 from oauth2client import file, client, tools
 
-from .tools import doctemplate
-
 from ._compat import map, string_types
+
+from .tools import doctemplate
 
 __all__ = ['get_credentials']
 

@@ -2,9 +2,8 @@
 
 import sys
 
-import pytest
-
 import oauth2client
+import pytest
 
 FILES = {'files': [{'id': 'spam', 'name': 'Spam'}]}
 

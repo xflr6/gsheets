@@ -2,8 +2,13 @@
 
 """Python objects for spreadsheets consisting of worksheets."""
 
-from . import backend, urls, coordinates, export, tools
 from ._compat import string_types, map, zip
+
+from . import backend
+from . import coordinates
+from . import export
+from . import tools
+from . import urls
 
 __all__ = ['SpreadSheet', 'SheetsView', 'WorkSheet']
 
