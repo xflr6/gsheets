@@ -16,6 +16,8 @@ setup(
         'Documentation': 'https://gsheets.readthedocs.io',
         'Changelog': 'https://gsheets.readthedocs.io/en/latest/changelog.html',
         'Issue Tracker': 'https://github.com/xflr6/gsheets/issues',
+        'CI': 'https://travis-ci.org/xflr6/gsheets',
+        'Coverage': 'https://codecov.io/gh/xflr6/gsheets',
     },
     packages=find_packages(),
     platforms='any',
