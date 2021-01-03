@@ -82,13 +82,13 @@ Fetch a spreadsheet by id or url:
 
     # id only
     >>> sheets['1dR13B3Wi_KJGUJQ0BZa2frLAVxhZnbz0hpwCcWSvb20']
-    <SpreadSheet 1dR13...20 u'Spam'>
+    <SpreadSheet 1dR13...20 'Spam'>
 
     # id or url
     >>> url = 'https://docs.google.com/spreadsheets/d/1dR13B3Wi_KJGUJQ0BZa2frLAVxhZnbz0hpwCcWSvb20'
     >>> s = sheets.get(url)  
     >>> s
-    <SpreadSheet 1dR13...20 u'Spam'>
+    <SpreadSheet 1dR13...20 'Spam'>
 
 Access worksheets and their values:
 
@@ -96,11 +96,11 @@ Access worksheets and their values:
 
     # first worksheet with title
     >>> s.find('Tabellenblatt2')
-    <WorkSheet 1747240182 u'Tabellenblatt2' (10x2)>
+    <WorkSheet 1747240182 'Tabellenblatt2' (10x2)>
 
     # worksheet by position, cell value by index
     >>> s.sheets[0]['A1']
-    u'spam'
+    'spam'
 
     # worksheet by id, cell value by position
     >>> s[1747240182].at(row=1, col=1)

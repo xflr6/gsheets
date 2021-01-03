@@ -2,8 +2,6 @@
 
 """Python objects for spreadsheets consisting of worksheets."""
 
-from ._compat import string_types, map, zip
-
 from . import backend
 from . import coordinates
 from . import export
@@ -391,12 +389,12 @@ class WorkSheet(object):
                     'gid': self._id,
                     'index': self._index,
                     'dialect': dialect}
-            if isinstance(make_filename, string_types):
+            if isinstance(make_filename, str):
                 filename = make_filename % infos
             else:
                 filename = make_filename(infos)
-        with export.open_csv(filename, 'w', encoding=encoding) as fd:
-            export.write_csv(fd, self._values, encoding, dialect)
+        with open(filename, 'w', encoding=encoding, newline='') as fd:
+            export.write_csv(fd, self._values, dialect=dialect)
 
     def to_frame(self, assign_name=False, **kwargs):
         r"""Return a pandas DataFrame loaded from the worksheet data.

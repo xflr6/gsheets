@@ -6,8 +6,6 @@ import os
 
 from oauth2client import file, client, tools
 
-from ._compat import map, string_types
-
 from .tools import doctemplate
 
 __all__ = ['get_credentials']
@@ -94,6 +92,6 @@ class Scopes(object):
         """Return default or predefined URLs from keyword, pass through ``scope``."""
         if scope is None:
             scope = cls.default
-        if isinstance(scope, string_types) and scope in cls._keywords:
+        if isinstance(scope, str) and scope in cls._keywords:
             return getattr(cls, scope)
         return scope

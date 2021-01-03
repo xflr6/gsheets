@@ -1,7 +1,5 @@
 # conftest.py
 
-import sys
-
 import oauth2client
 import pytest
 
@@ -19,15 +17,9 @@ SPREADSHEET = {
 }
 
 
-@pytest.fixture(scope='session')
-def py2():
-    return sys.version_info.major == 2
-
-
 @pytest.fixture
-def open_(mocker, py2):
-    target = '__builtin__.open' if py2 else 'builtins.open'
-    yield mocker.patch(target, mocker.mock_open())
+def open_(mocker):
+    yield mocker.patch('builtins.open', mocker.mock_open())
 
 
 @pytest.fixture

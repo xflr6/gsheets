@@ -4,8 +4,6 @@
 
 import apiclient
 
-from ._compat import iteritems
-
 __all__ = ['build_service', 'iterfiles', 'spreadsheet', 'values']
 
 SERVICES = {'sheets': {'serviceName': 'sheets', 'version': 'v4'},
@@ -19,7 +17,7 @@ FILEORDER = 'folder,name,createdTime'
 def build_service(name=None, **kwargs):
     """Return a service endpoint for interacting with a Google API."""
     if name is not None:
-        for kw, value in iteritems(SERVICES[name]):
+        for kw, value in SERVICES[name].items():
             kwargs.setdefault(kw, value)
     if 'cache_discovery' not in kwargs:
         try:

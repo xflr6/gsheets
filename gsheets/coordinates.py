@@ -5,8 +5,6 @@
 import re
 import string
 
-from ._compat import iteritems
-
 __all__ = ['Coordinates']
 
 
@@ -136,7 +134,7 @@ class Coordinates(object):
         return Row(cls._rint(row))
 
     def __repr__(self):
-        items = sorted((k, v) for k, v in iteritems(self.__dict__)
+        items = sorted((k, v) for k, v in self.__dict__.items()
                        if not k.startswith('_'))
         args = ', '.join('%s=%r' % (k, v) for k, v in items)
         return '<%s(%s)>' % (self.__class__.__name__, args)
