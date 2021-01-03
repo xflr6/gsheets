@@ -20,7 +20,7 @@ sheets = Sheets.from_files('~/client_secrets.json', '~/gsheets-storage.json')
 
 print(sheets[SHEET_ID])
 
-url = 'https://docs.google.com/spreadsheets/d/%s' % SHEET_ID
+url = f'https://docs.google.com/spreadsheets/d/{SHEET_ID}'
 s = sheets.get(url)
 print(s)
 

@@ -12,7 +12,7 @@ class SheetUrl(object):
 
     _pattern = re.compile(r'/spreadsheets/d/(?P<id>[a-zA-Z0-9-_]+)')
 
-    _template = 'https://docs.google.com/spreadsheets/d/%(id)s/edit#gid=%(gid)d'
+    _template = 'https://docs.google.com/spreadsheets/d/{id}/edit#gid={gid:d}'
 
     @classmethod
     def from_string(cls, link):
@@ -40,8 +40,7 @@ class SheetUrl(object):
         self.gid = gid
 
     def __repr__(self):
-        return '<%s id=%r gid=%d>' % (self.__class__.__name__,
-                                      self.id, self.gid)
+        return f'<{self.__class__.__name__} id={self.id!r} gid={self.gid:d}>'
 
     def to_string(self, gid=None):
         """
@@ -54,7 +53,7 @@ class SheetUrl(object):
         """
         if gid is None:
             gid = self.gid
-        return self._template % {'id': self.id, 'gid': gid}
+        return self._template.format(id=self.id, gid=gid)
 
     __str__ = to_string
 
@@ -70,4 +69,4 @@ class SheetUrl(object):
         """
         if len(self.id) <= 10:
             return self.id
-        return '%s...%s' % (self.id[:5], self.id[-2:])
+        return f'{self.id[:5]}...{self.id[-2:]}'

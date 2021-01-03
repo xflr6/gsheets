@@ -136,8 +136,8 @@ class Coordinates(object):
     def __repr__(self):
         items = sorted((k, v) for k, v in self.__dict__.items()
                        if not k.startswith('_'))
-        args = ', '.join('%s=%r' % (k, v) for k, v in items)
-        return '<%s(%s)>' % (self.__class__.__name__, args)
+        args = ', '.join(f'{k}={v!r}' for k, v in items)
+        return f'<{self.__class__.__name__}({args})>'
 
 
 class Cell(Coordinates):

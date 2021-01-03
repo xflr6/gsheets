@@ -37,9 +37,9 @@ def iterfiles(service, name=None, mimeType=SHEET, order=FILEORDER):  # noqa: N80
     params = {'orderBy': order, 'pageToken': None}
     q = []
     if name is not None:
-        q.append("name='%s'" % name)
+        q.append(f"name='{name}'")
     if mimeType is not None:
-        q.append("mimeType='%s'" % mimeType)
+        q.append(f"mimeType='{mimeType}'")
     if q:
         params['q'] = ' and '.join(q)
 

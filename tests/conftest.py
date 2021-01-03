@@ -62,8 +62,9 @@ def files_name(services, files):
     yield files
 
     list_ = services.drive.files.return_value.list
+    name = files['files'][0]['name']
     list_.assert_called_once_with(
-        q="name='%s' and mimeType='application/vnd.google-apps.spreadsheet'" % files['files'][0]['name'],
+        q=f"name='{name}' and mimeType='application/vnd.google-apps.spreadsheet'",
         orderBy='folder,name,createdTime',
         pageToken=None)
     list_.return_value.execute.assert_called_once_with()
@@ -76,8 +77,9 @@ def files_name_unknown(services, files):
 
     yield files
 
+    name = files['files'][0]['name']
     list_.assert_called_once_with(
-        q="name='%s' and mimeType='application/vnd.google-apps.spreadsheet'" % files['files'][0]['name'],
+        q=f"name='{name}' and mimeType='application/vnd.google-apps.spreadsheet'",
         orderBy='folder,name,createdTime',
         pageToken=None)
     list_.return_value.execute.assert_called_once_with()

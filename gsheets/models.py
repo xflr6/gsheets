@@ -35,8 +35,7 @@ class SpreadSheet(object):
         self._service = service
 
     def __repr__(self):
-        return '<%s %s %r>' % (self.__class__.__name__,
-            self._url.short_id, self._title)
+        return f'<{self.__class__.__name__} {self._url.short_id} {self._title!r}>'
 
     def __eq__(self, other):
         if isinstance(other, SpreadSheet):
@@ -259,9 +258,8 @@ class WorkSheet(object):
         self._spreadsheet = None
 
     def __repr__(self):
-        return '<%s %d %r (%dx%d)>' % (self.__class__.__name__,
-                                       self._id, self._title,
-                                       self.nrows, self.ncols)
+        return (f'<{self.__class__.__name__} {self._id:d} {self._title!r}'
+                f' ({self.nrows:d}x{self.ncols:d})>')
 
     def __eq__(self, other):
         if isinstance(other, WorkSheet):
