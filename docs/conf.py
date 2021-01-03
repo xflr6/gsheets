@@ -21,11 +21,11 @@ import gsheets
 # -- Project information -----------------------------------------------------
 
 project = 'gsheets'
-copyright = '2016-2020, Sebastian Bank'
+copyright = '2016-2021, Sebastian Bank'
 author = 'Sebastian Bank'
 
 # The short X.Y version
-version = '0.5.2.dev0'
+version = '0.6.dev0'
 # The full version, including alpha/beta/rc tags
 release = version
 
