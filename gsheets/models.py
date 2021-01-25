@@ -191,7 +191,10 @@ class SpreadSheet(object):
         ``filename = make_filename(infos)``.
         """
         for s in self._sheets:
-            s.to_csv(None, encoding, dialect, make_filename)
+            s.to_csv(None,
+                     encoding=encoding,
+                     dialect=dialect,
+                     make_filename=make_filename)
 
 
 class SheetsView(tools.list_view):

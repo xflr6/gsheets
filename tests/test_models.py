@@ -115,10 +115,10 @@ class TestSpreadSheet(object):
     def test_to_csv(self, mocker, sheet):
         ws = mocker.create_autospec(gsheets.models.WorkSheet, instance=True)
         mocker.patch.object(sheet, '_sheets', **{'__iter__.return_value': [ws]})
-        args = [getattr(mocker.sentinel, s)
-                for s in ('encoding', 'dialect', 'make_filename')]
-        sheet.to_csv(*args)
-        ws.to_csv.assert_called_once_with(None, *args)
+        kwargs = {s: getattr(mocker.sentinel, s)
+                for s in ('encoding', 'dialect', 'make_filename')}
+        sheet.to_csv(**kwargs)
+        ws.to_csv.assert_called_once_with(None, **kwargs)
 
 
 class TestSheetsView(object):
@@ -187,7 +187,7 @@ class TestWorkSheet(object):
         assert ws.values() == [[1, 2], [3, 4]]
 
     def test_values_column_major(self, ws):
-        assert ws.values(True) == [[1, 3], [2, 4]]
+        assert ws.values(column_major=True) == [[1, 3], [2, 4]]
 
     def test_spreadseet(self, ws):
         assert ws.spreadsheet.id == 'spam'

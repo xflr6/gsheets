@@ -32,7 +32,8 @@ class Sheets(object):
         Returns:
             Sheets: new Sheets instance with OAauth 2.0 credentials
         """
-        creds = oauth2.get_credentials(scopes, secrets, storage, no_webserver)
+        creds = oauth2.get_credentials(scopes, secrets, storage,
+                                       no_webserver=no_webserver)
         return cls(creds)
 
     @classmethod
