@@ -18,7 +18,8 @@ STORAGE = '~/storage.json'
 
 
 @doctemplate(SCOPES, SECRETS, STORAGE)
-def get_credentials(scopes=None, secrets=None, storage=None, no_webserver=False):
+def get_credentials(scopes=None, secrets=None, storage=None, *,
+                    no_webserver=False):
     """Make OAuth 2.0 credentials for scopes from ``secrets`` and ``storage`` files.
 
     Args:

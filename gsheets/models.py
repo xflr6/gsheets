@@ -169,7 +169,9 @@ class SpreadSheet(object):
         """The first worksheet of the spreadsheet."""
         return self._sheets[0]
 
-    def to_csv(self, encoding=export.ENCODING, dialect=export.DIALECT,
+    def to_csv(self, *,
+               encoding=export.ENCODING,
+               dialect=export.DIALECT,
                make_filename=export.MAKE_FILENAME):
         """Dump all worksheets of the spreadsheet to individual CSV files.
 
@@ -225,7 +227,7 @@ class SheetsView(tools.list_view):
         """
         return [s.id for s in self._items]
 
-    def titles(self, unique=False):
+    def titles(self, *, unique=False):
         """Return a list of contained worksheet titles.
 
         Args:
@@ -302,7 +304,7 @@ class WorkSheet(object):
             raise TypeError(row, col)
         return self._values[row][col]
 
-    def values(self, column_major=False):
+    def values(self, *, column_major=False):
         """Return a nested list with the worksheet values.
 
         Args:
@@ -357,8 +359,9 @@ class WorkSheet(object):
         """Number of cells in the worksheet (``int``)."""
         return self.nrows * self.ncols
 
-    def to_csv(self, filename=None,
-               encoding=export.ENCODING, dialect=export.DIALECT,
+    def to_csv(self, filename=None, *,
+               encoding=export.ENCODING,
+               dialect=export.DIALECT,
                make_filename=export.MAKE_FILENAME):
         """Dump the worksheet to a CSV file.
 
@@ -394,7 +397,7 @@ class WorkSheet(object):
         with open(filename, 'w', encoding=encoding, newline='') as fd:
             export.write_csv(fd, self._values, dialect=dialect)
 
-    def to_frame(self, assign_name=False, **kwargs):
+    def to_frame(self, *, assign_name=False, **kwargs):
         r"""Return a pandas DataFrame loaded from the worksheet data.
 
         Args:

@@ -16,13 +16,13 @@ DIALECT = 'excel'
 MAKE_FILENAME = '%(title)s - %(sheet)s.csv'
 
 
-def write_csv(fileobj, rows, dialect=DIALECT):
+def write_csv(fileobj, rows, *, dialect=DIALECT):
     """Dump rows to ``fileobj`` with the given CSV ``dialect``."""
     csvwriter = csv.writer(fileobj, dialect=dialect)
     csvwriter.writerows(rows)
 
 
-def write_dataframe(rows, dialect=DIALECT, **kwargs):
+def write_dataframe(rows, *, dialect=DIALECT, **kwargs):
     """Dump ``rows`` to string buffer and load with ``pandas.read_csv()`` using ``kwargs``."""
     global pandas
     if pandas is None:  # pragma: no cover

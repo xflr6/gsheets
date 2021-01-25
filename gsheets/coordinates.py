@@ -8,7 +8,7 @@ import string
 __all__ = ['Coordinates']
 
 
-def base26int(s, _start=1 - ord('A')):
+def base26int(s, *, _start=1 - ord('A')):
     """Return string ``s`` as ``int`` in bijective base26 notation.
 
     >>> base26int('SPAM')
@@ -17,7 +17,7 @@ def base26int(s, _start=1 - ord('A')):
     return sum((_start + ord(c)) * 26**i for i, c in enumerate(reversed(s)))
 
 
-def base26(x, _alphabet=string.ascii_uppercase):
+def base26(x, *, _alphabet=string.ascii_uppercase):
     """Return positive ``int`` ``x`` as string in bijective base26 notation.
 
     >>> [base26(i) for i in [0, 1, 2, 26, 27, 28, 702, 703, 704]]
@@ -82,7 +82,7 @@ class Coordinates(object):
                         r')\s*$')
 
     @staticmethod
-    def _parse(coord, _match=_regex.match):
+    def _parse(coord, *, _match=_regex.match):
         """Return match groups from single sheet coordinate.
 
         >>> Coordinates._parse('A1')
@@ -102,7 +102,7 @@ class Coordinates(object):
             raise ValueError(coord)
 
     @staticmethod
-    def _cint(col, _map={base26(i): i - 1 for i in range(1, 257)}):
+    def _cint(col, *, _map={base26(i): i - 1 for i in range(1, 257)}):
         """Return zero-based column index from bijective base26 string.
 
         >>> Coordinates._cint('Ab')
@@ -119,7 +119,7 @@ class Coordinates(object):
             raise ValueError(col)
 
     @staticmethod
-    def _rint(row, _int=int):
+    def _rint(row, *, _int=int):
         return _int(row) - 1
 
     @classmethod
