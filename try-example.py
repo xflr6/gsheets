@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # try-example.py - import gsheets here and try example code w/ logging
 
 import logging

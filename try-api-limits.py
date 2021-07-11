@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # try-api-limits.py - investigate api limits with larger sheets
 
 from __future__ import print_function
