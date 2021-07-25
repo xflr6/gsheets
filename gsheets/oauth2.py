@@ -52,7 +52,7 @@ def get_credentials(scopes=None, secrets=None, storage=None, *,
     return creds
 
 
-class Scopes(object):
+class Scopes:
     """URLs for read or read/write access to Google sheets and drive.
 
     see https://developers.google.com/sheets/guides/authorizing

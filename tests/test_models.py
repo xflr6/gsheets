@@ -27,7 +27,7 @@ def ws_nonascii(ws):
     yield ws
 
 
-class TestSpreadSheet(object):
+class TestSpreadSheet:
 
     def test_repr(self, sheet):
         assert repr(sheet) == "<SpreadSheet spam 'Spam'>"
@@ -121,7 +121,7 @@ class TestSpreadSheet(object):
         ws.to_csv.assert_called_once_with(None, **kwargs)
 
 
-class TestSheetsView(object):
+class TestSheetsView:
 
     def test_eq_fail(self, view):
         assert not view == list(view)
@@ -146,7 +146,7 @@ class TestSheetsView(object):
         assert view.titles(unique=True) == ['Spam1']
 
 
-class TestWorkSheet(object):
+class TestWorkSheet:
 
     def test_repr(self, ws):
         assert repr(ws) == "<WorkSheet 0 'Spam1' (2x2)>"

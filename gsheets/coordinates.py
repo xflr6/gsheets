@@ -47,7 +47,7 @@ def base26(x: int,
     return ''.join(digits[::-1])
 
 
-class Cells(object):
+class Cells:
     """Row-major cell collection for doctests.
 
         A  B  C
@@ -63,9 +63,11 @@ class Cells(object):
         return coord, coord(self._rows)
 
 
-class Coordinates(object):
+class Coordinates:
     """Callable fetching values from row major cells.
 
+    >>> type('B1')
+    <class 'str'>
     >>> Coordinates.from_string('B1')([[1, 2], [3, 4]])
     2
 

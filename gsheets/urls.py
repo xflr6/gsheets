@@ -7,7 +7,7 @@ import re
 __all__ = ['SheetUrl']
 
 
-class SheetUrl(object):
+class SheetUrl:
     """URL for (the first or another) sheet of a Google docs spreadsheet."""
 
     _pattern = re.compile(r'/spreadsheets/d/(?P<id>[a-zA-Z0-9-_]+)')

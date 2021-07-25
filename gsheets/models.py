@@ -11,7 +11,7 @@ from . import urls
 __all__ = ['SpreadSheet', 'SheetsView', 'WorkSheet']
 
 
-class SpreadSheet(object):
+class SpreadSheet:
     """Fetched collection of worksheets."""
 
     @classmethod
@@ -244,7 +244,7 @@ class SheetsView(tools.list_view):
         return [s.title for s in self._items]
 
 
-class WorkSheet(object):
+class WorkSheet:
     """Two-dimensional table with cells accessible via A1 notation."""
 
     @classmethod

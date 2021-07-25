@@ -13,7 +13,7 @@ __all__ = ['Sheets']
 # TODO: get worksheet
 
 
-class Sheets(object):
+class Sheets:
     """Collection of spreadsheets available from given OAuth 2.0 credentials
     or API key.
     """
