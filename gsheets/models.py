@@ -18,7 +18,8 @@ class SpreadSheet(object):
     def _from_response(cls, response, service):
         id = response['spreadsheetId']
         title = response['properties']['title']
-        ranges = [s['properties']['title'] for s in response['sheets']]
+        ranges = [backend.quote(s['properties']['title'])
+                  for s in response['sheets']]
         values = backend.values(service, id, ranges)
         sheets = map(WorkSheet._from_response, response['sheets'], values)
         return cls(id, title, list(sheets), service)

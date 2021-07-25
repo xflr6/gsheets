@@ -1,10 +1,14 @@
-# backend.py - talk to the sheets and drive api with google-api-client-python
+"""Thin wrappers around google-api-client-python talking to sheets/drive API."""
 
-"""Thin wrappers around apiclient method calls."""
+import re
 
 import apiclient
 
-__all__ = ['build_service', 'iterfiles', 'spreadsheet', 'values']
+__all__ = ['build_service',
+           'iterfiles',
+           'spreadsheet',
+           'values'
+           'quote']
 
 SERVICES = {'sheets': {'serviceName': 'sheets', 'version': 'v4'},
             'drive': {'serviceName': 'drive', 'version': 'v3'}}
@@ -12,6 +16,9 @@ SERVICES = {'sheets': {'serviceName': 'sheets', 'version': 'v4'},
 SHEET = 'application/vnd.google-apps.spreadsheet'
 
 FILEORDER = 'folder,name,createdTime'
+
+IS_ALPHANUMERIC_A1 = re.compile(r'[a-zA-Z]{1,3}'  # last column 'ZZZ' (18_278)
+                                r'\d{1,}').fullmatch
 
 
 def build_service(name=None, **kwargs):
@@ -77,3 +84,21 @@ def values(service, id, ranges):
     request = service.spreadsheets().values().batchGet(**params)
     response = request.execute()
     return response['valueRanges']
+
+
+def quote(worksheet_name: str) -> str:
+    """Return ``worksheet_name``, single-quote if needed.
+
+    >>> quote('spam')
+    'spam'
+
+    >>> quote('spam spam')
+    'spam spam'
+
+    >>> quote('DKC3')
+    "'DKC3'"
+    """
+    if IS_ALPHANUMERIC_A1(worksheet_name):
+        # https://developers.google.com/sheets/api/guides/concepts#expandable-1
+        return f"'{worksheet_name}'"
+    return worksheet_name

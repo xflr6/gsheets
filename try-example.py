@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-# try-example.py - import gsheets here and try example code w/ logging
+
+""""Import ``gsheets`` here and try example code w/ logging."""
 
 import logging
 
