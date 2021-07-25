@@ -8,17 +8,26 @@ import string
 __all__ = ['Coordinates']
 
 
-def base26int(s, *, _start=1 - ord('A')):
+def base26int(s: str,
+              *, _start: int = 1 - ord('A')) -> int:
     """Return string ``s`` as ``int`` in bijective base26 notation.
+
+    >>> base26int('A'), base26int('ZZZ')
+    (1, 18278)
 
     >>> base26int('SPAM')
     344799
     """
-    return sum((_start + ord(c)) * 26**i for i, c in enumerate(reversed(s)))
+    return sum((_start + ord(c)) * 26**i
+               for i, c in enumerate(reversed(s)))
 
 
-def base26(x, *, _alphabet=string.ascii_uppercase):
+def base26(x: int,
+           *, _alphabet=string.ascii_uppercase) -> str:
     """Return positive ``int`` ``x`` as string in bijective base26 notation.
+
+    >>> base26(1), base26(18278)
+    ('A', 'ZZZ')
 
     >>> [base26(i) for i in [0, 1, 2, 26, 27, 28, 702, 703, 704]]
     ['', 'A', 'B', 'Z', 'AA', 'AB', 'ZZ', 'AAA', 'AAB']
@@ -29,14 +38,13 @@ def base26(x, *, _alphabet=string.ascii_uppercase):
     >>> base26(256)
     'IV'
     """
-    result = []
-    while x:
-        x, digit = divmod(x, 26)
-        if not digit:
-            x -= 1
-            digit = 26
-        result.append(_alphabet[digit - 1])
-    return ''.join(result[::-1])
+    def iter_digits(x):
+        while x:
+            x, digit = divmod(x - 1, 26)
+            yield _alphabet[digit]
+
+    digits = list(iter_digits(x))
+    return ''.join(digits[::-1])
 
 
 class Cells(object):
