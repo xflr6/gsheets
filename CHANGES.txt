@@ -1,12 +1,19 @@
 Changelog
 =========
 
-Version 0.6 (in development)
-----------------------------
+Version 0.6
+-----------
 
 Drop Python 2 support.
 
+Fix loading of sheets that contain worksheets with titles that are also a valid
+reference in A1-notation (add quoting, GH #21).
+
 Drop Python 3.5 support and tag Python 3.9 and 3.10 support.
+
+Changed a few optional flags to keyword-only arguments.
+
+Migrate CI to GitHub actions and extend build matrix.
 
 
 Version 0.5.1
