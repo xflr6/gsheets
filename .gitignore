@@ -11,9 +11,10 @@ __pycache__/
 
 /.venv/
 /.pytest_cache/
-/.coverage
-/htmlcov/
 /.tox/
+/htmlcov/
+/.coverage
+/test-log.txt
 
 Thumbs.db
 
