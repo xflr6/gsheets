@@ -1,7 +1,7 @@
 gsheets
 =======
 
-|PyPI version| |License| |Supported Python| |Format|
+|PyPI version| |License| |Supported Python| |Wheel|
 
 |Build| |Codecov| |Readthedocs-stable| |Readthedocs-latest|
 
@@ -193,14 +193,14 @@ This package is distributed under the `MIT license`_.
     :target: https://pypi.org/project/gsheets/
     :alt: Latest PyPI Version
 .. |License| image:: https://img.shields.io/pypi/l/gsheets.svg
-    :target: https://pypi.org/project/gsheets/
+    :target: https://github.com/xflr6/gsheets/blob/master/LICENSE.txt
     :alt: License
 .. |Supported Python| image:: https://img.shields.io/pypi/pyversions/gsheets.svg
     :target: https://pypi.org/project/gsheets/
     :alt: Supported Python Versions
-.. |Format| image:: https://img.shields.io/pypi/format/gsheets.svg
-    :target: https://pypi.org/project/gsheets/
-    :alt: Format
+.. |Wheel| image:: https://img.shields.io/pypi/wheel/gsheets.svg
+    :target: https://pypi.org/project/gsheets/#files
+    :alt: Wheel format
 
 .. |Build| image:: https://github.com/xflr6/gsheets/actions/workflows/build.yaml/badge.svg?branch=master
     :target: https://github.com/xflr6/gsheets/actions/workflows/build.yaml?query=branch%3Amaster
