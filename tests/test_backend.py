@@ -1,5 +1,3 @@
-# test_backend.py
-
 import pytest
 
 from gsheets import backend

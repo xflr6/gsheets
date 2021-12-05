@@ -1,5 +1,3 @@
-# export.py - write csv, read csv buffer into pandas dataframe
-
 """Dump spreadsheet values to CSV files and pandas DataFrames."""
 
 import csv

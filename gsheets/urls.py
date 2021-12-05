@@ -1,6 +1,4 @@
-# urls.py - parse and generate spreadsheet urls
-
-"""Spreadsheet and worksheet URLs."""
+"""Parse and generate Spreadsheet and worksheet URLs."""
 
 import re
 

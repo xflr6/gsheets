@@ -1,5 +1,3 @@
-# auth.py - do oauth2
-
 """Helpers for doing OAuth 2.0 authentification."""
 
 import os

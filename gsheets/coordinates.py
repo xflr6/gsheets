@@ -1,5 +1,3 @@
-# coordinates.py - get cell values by sheet coodinates and slices
-
 """Return cell values and slices from sheet coordinate strings."""
 
 import re

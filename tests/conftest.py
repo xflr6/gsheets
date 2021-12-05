@@ -1,5 +1,3 @@
-# conftest.py
-
 import oauth2client
 import pytest
 

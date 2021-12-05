@@ -1,5 +1,3 @@
-# test_api.py
-
 import pytest
 
 import gsheets

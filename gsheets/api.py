@@ -1,5 +1,3 @@
-# api.py - library user interface
-
 """Main interface for the library user."""
 
 from . import backend

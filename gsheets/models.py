@@ -1,5 +1,3 @@
-# models.py - library user facing objects
-
 """Python objects for spreadsheets consisting of worksheets."""
 
 from . import backend
