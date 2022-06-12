@@ -19,7 +19,7 @@ import gsheets
 # -- Project information -----------------------------------------------------
 
 project = 'gsheets'
-copyright = '2016-2021, Sebastian Bank'
+copyright = '2016-2022, Sebastian Bank'
 author = 'Sebastian Bank'
 
 # The full version, including alpha/beta/rc tags
