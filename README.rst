@@ -140,7 +140,7 @@ See also
   Spreadsheet to CSV or convert any subsheet to a pandas DataFrame (Python 2
   prototype for this library)
 - gspread_ |--| Google Spreadsheets Python API (more mature and featureful
-  Python wrapper, currently using the XML-based `legacy v3 API`_)
+  Python wrapper, updated to API v4)
 - `example Jupyter notebook`_ using gspread_ to fetch a sheet into a pandas
   DataFrame
 - df2gspread_ |--| Transfer data between Google Spreadsheets and Pandas (build
