@@ -152,6 +152,7 @@ See also
   bidirectional transfer library, using the `legacy v3 API`_, Python 3 only)
 - PyDrive_ |--| Google Drive API made easy (google-api-python-client_ wrapper
   for the `Google Drive`_ API, currently v2) 
+- goshdb_ |--| Python client to key-value database based on Google Sheets (API v4)
 
 
 License
@@ -182,6 +183,7 @@ This package is distributed under the `MIT license`_.
 .. _gspread-pandas: https://pypi.org/project/gspread-pandas/
 .. _pgsheets: https://pypi.org/project/pgsheets/
 .. _PyDrive: https://pypi.org/project/PyDrive/
+.. _goshdb: https://pypi.org/project/goshdb/
 
 .. _MIT license: https://opensource.org/licenses/MIT
 
