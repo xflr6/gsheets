@@ -5,6 +5,8 @@ Changelog
 Version 0.6.2 (in development)
 ------------------------------
 
+Switch to pyproject.toml.
+
 Drop Python 3.7 support and tag Python 3.11 support.
 
 
