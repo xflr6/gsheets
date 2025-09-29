@@ -7,7 +7,7 @@ Version 0.6.2 (in development)
 
 Switch to pyproject.toml.
 
-Drop Python 3.7 support and tag Python 3.11 support.
+Drop Python 3.7, 3.8, and 3.9 support and tag Python 3.11, 3.12, and 3.13 support.
 
 
 Version 0.6.1
