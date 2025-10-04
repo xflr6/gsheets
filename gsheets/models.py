@@ -22,7 +22,7 @@ class SpreadSheet:
         sheets = map(WorkSheet._from_response, response['sheets'], values)
         return cls(id, title, list(sheets), service)
 
-    def __init__(self, id, title, sheets, service):
+    def __init__(self, id, title, sheets, service) -> None:
         self._id = id
         self._title = title
         self._url = urls.SheetUrl(self._id)
@@ -33,7 +33,7 @@ class SpreadSheet:
         self._titles = tools.group_dict(sheets, lambda s: s.title)
         self._service = service
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'<{self.__class__.__name__} {self._url.short_id} {self._title!r}>'
 
     def __eq__(self, other):
@@ -46,7 +46,7 @@ class SpreadSheet:
             return self.sheets != other.sheets
         return NotImplemented
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Return the number of contained worksheets.
 
         Returns:
@@ -62,7 +62,7 @@ class SpreadSheet:
         """
         return iter(self._sheets)
 
-    def __contains__(self, id):
+    def __contains__(self, id) -> bool:
         """Return if the spreadsheet has a worksheet with the given id.
 
         Args:
@@ -146,7 +146,7 @@ class SpreadSheet:
         return SheetsView(self._sheets)
 
     @property
-    def id(self):
+    def id(self) -> str:
         """Unique alphanumeric id of the spreadsheet (``str``).
 
         see https://developers.google.com/sheets/guides/concepts#spreadsheet_id
@@ -154,12 +154,12 @@ class SpreadSheet:
         return self._id
 
     @property
-    def title(self):
+    def title(self) -> str:
         """Title/name of the spreadsheet (``str``)."""
         return self._title
 
     @property
-    def url(self):
+    def url(self) -> str:
         """URL pointing to the first worksheet of the spreadsheet (``str``)."""
         return self._url.to_string()
 
@@ -171,7 +171,7 @@ class SpreadSheet:
     def to_csv(self, *,
                encoding=export.ENCODING,
                dialect=export.DIALECT,
-               make_filename=export.MAKE_FILENAME):
+               make_filename=export.MAKE_FILENAME) -> None:
         """Dump all worksheets of the spreadsheet to individual CSV files.
 
         Args:
@@ -221,7 +221,7 @@ class SheetsView(tools.list_view):
         """
         return self._items[index]
 
-    def ids(self):
+    def ids(self) -> list[str]:
         """Return a list of contained worksheet ids.
 
         Returns:
@@ -229,7 +229,7 @@ class SheetsView(tools.list_view):
         """
         return [s.id for s in self._items]
 
-    def titles(self, *, unique=False):
+    def titles(self, *, unique=False) -> list[str]:
         """Return a list of contained worksheet titles.
 
         Args:
@@ -254,14 +254,14 @@ class WorkSheet:
         values = valuerange.get('values', [[]])
         return cls(id, title, index, values)
 
-    def __init__(self, id, title, index, values):
+    def __init__(self, id, title, index, values) -> None:
         self._id = id
         self._title = title
         self._index = index
         self._values = values
         self._spreadsheet = None
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return (f'<{self.__class__.__name__} {self._id:d} {self._title!r}'
                 f' ({self.nrows:d}x{self.ncols:d})>')
 
@@ -324,7 +324,7 @@ class WorkSheet:
         return self._spreadsheet
 
     @property
-    def id(self):
+    def id(self) -> str:
         """Stable numeric worksheet id (``int``), unique within its spreadsheet.
 
         see https://developers.google.com/sheets/guides/concepts#sheet_id
@@ -332,12 +332,12 @@ class WorkSheet:
         return self._id
 
     @property
-    def title(self):
+    def title(self) -> str:
         """Worksheet title/name (``str``)."""
         return self._title
 
     @property
-    def url(self):
+    def url(self) -> str:
         """URL pointing to the worksheet (``str``)."""
         return self._spreadsheet._url.to_string(gid=self.id)
 
@@ -347,24 +347,24 @@ class WorkSheet:
         return self._index
 
     @property
-    def nrows(self):
+    def nrows(self) -> int:
         """Number of rows in the worksheet (``int``)."""
         return len(self._values)
 
     @property
-    def ncols(self):
+    def ncols(self) -> int:
         """Number of columns in the worksheet (int)."""
         return len(self._values[0])
 
     @property
-    def ncells(self):
+    def ncells(self) -> int:
         """Number of cells in the worksheet (``int``)."""
         return self.nrows * self.ncols
 
     def to_csv(self, filename=None, *,
                encoding=export.ENCODING,
                dialect=export.DIALECT,
-               make_filename=export.MAKE_FILENAME):
+               make_filename=export.MAKE_FILENAME) -> None:
         """Dump the worksheet to a CSV file.
 
         Args:

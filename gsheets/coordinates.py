@@ -141,7 +141,7 @@ class Coordinates:
             return Col(cls._cint(col))
         return Row(cls._rint(row))
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         items = sorted((k, v) for k, v in self.__dict__.items()
                        if not k.startswith('_'))
         args = ', '.join(f'{k}={v!r}' for k, v in items)
@@ -155,7 +155,7 @@ class Cell(Coordinates):
     (<Cell(col=1, row=1)>, 5)
     """
 
-    def __init__(self, col, row):
+    def __init__(self, col: int, row: int) -> None:
         self.col = col
         self.row = row
 
@@ -169,7 +169,7 @@ class Col(Coordinates):
     >>> Cells()['B']
     (<Col(col=1)>, [2, 5, 8])
     """
-    def __init__(self, col):
+    def __init__(self, col: int) -> None:
         self.col = col
 
     def __call__(self, x):
@@ -184,7 +184,7 @@ class Row(Coordinates):
     (<Row(row=1)>, [4, 5, 6])
     """
 
-    def __init__(self, row):
+    def __init__(self, row: int) -> None:
         self.row = row
 
     def __call__(self, x):
@@ -226,7 +226,7 @@ class Slice(Coordinates):
             return StopRow(cls._rint(row) + 1)
         return cls()
 
-    def __call__(self, x):
+    def __call__(self, x) -> list[list[int]]:
         return [r[:] for r in x]
 
 
@@ -392,7 +392,7 @@ class StartCellStopCell(DoubleSlice):
     (<Empty()>, [])
     """
 
-    def __init__(self, start_col, start_row, stop_col, stop_row):
+    def __init__(self, start_col, start_row, stop_col, stop_row) -> None:
         self.col = slice(start_col, stop_col)
         self.row = slice(start_row, stop_row)
 
@@ -410,7 +410,7 @@ class StartCellStopCol(Cell, DoubleSlice):
     (<Empty()>, [])
     """
 
-    def __init__(self, start_col, start_row, stop_col):
+    def __init__(self, start_col, start_row, stop_col) -> None:
         self.col = slice(start_col, stop_col)
         self.row = start_row
 
@@ -427,7 +427,7 @@ class StartCellStopRow(DoubleSlice):
     >>> Cells()['B3':'1']
     (<Empty()>, [])
     """
-    def __init__(self, start_col, start_row, stop_row):
+    def __init__(self, start_col, start_row, stop_row) -> None:
         self.col = start_col
         self.row = slice(start_row, stop_row)
 
@@ -445,7 +445,7 @@ class StartColStopCell(Cell, DoubleSlice):
     (<Empty()>, [])
     """
 
-    def __init__(self, start_col, stop_col, stop_row):
+    def __init__(self, start_col, stop_col, stop_row) -> None:
         self.col = slice(start_col, stop_col)
         self.row = stop_row
 
@@ -462,7 +462,7 @@ class StartRowStopCell(DoubleSlice):
     >>> Cells()['3':'A1']
     (<Empty()>, [])
     """
-    def __init__(self, start_row, stop_col, stop_row):
+    def __init__(self, start_row, stop_col, stop_row) -> None:
         self.col = stop_col
         self.row = slice(start_row, stop_row)
 
@@ -480,7 +480,7 @@ class StartColStopCol(Col, DoubleSlice):
     (<Empty()>, [])
     """
 
-    def __init__(self, start_col, stop_col):
+    def __init__(self, start_col, stop_col) -> None:
         self.col = slice(start_col, stop_col)
 
 
@@ -497,7 +497,7 @@ class StartRowStopRow(DoubleSlice):
     (<Empty()>, [])
     """
 
-    def __init__(self, start_row, stop_row):
+    def __init__(self, start_row, stop_row) -> None:
         self.row = slice(start_row, stop_row)
 
     def __call__(self, x):
@@ -511,7 +511,7 @@ class StartColStopRow(DoubleSlice):
     (<StartColStopRow(col=0, row=slice(None, 3, None))>, [1, 4, 7])
     """
 
-    def __init__(self, start_col, stop_row):
+    def __init__(self, start_col, stop_row) -> None:
         self.col = start_col
         self.row = slice(None, stop_row)
 
@@ -523,6 +523,6 @@ class StartRowStopCol(Cell, DoubleSlice):
     (<StartRowStopCol(col=slice(None, 3, None), row=0)>, [1, 2, 3])
     """
 
-    def __init__(self, start_row, stop_col):
+    def __init__(self, start_row, stop_col) -> None:
         self.col = slice(None, stop_col)
         self.row = start_row

@@ -1,5 +1,8 @@
 """Main interface for the library user."""
 
+from collections.abc import Iterator
+import functools
+
 from . import backend
 from . import models
 from . import oauth2
@@ -45,7 +48,7 @@ class Sheets:
         """
         return cls(credentials=None, developer_key=developer_key)
 
-    def __init__(self, credentials=None, developer_key=None):
+    def __init__(self, credentials=None, developer_key=None) -> None:
         """To access private data, you must provide OAuth2 credentials with
         access to the resource.
 
@@ -66,19 +69,19 @@ class Sheets:
         self._creds = credentials
         self._developer_key = developer_key
 
-    @tools.lazyproperty
+    @functools.cached_property
     def _sheets(self):
         """Google sheets API service endpoint (v4)."""
         return backend.build_service('sheets', credentials=self._creds,
                                      developerKey=self._developer_key)
 
-    @tools.lazyproperty
+    @functools.cached_property
     def _drive(self):
         """Google drive API service endpoint (v3)."""
         return backend.build_service('drive', credentials=self._creds,
                                      developerKey=self._developer_key)
 
-    def __len__(self):
+    def __len__(self) -> int:
         """Return the number of available spreadsheets.
 
         Returns:
@@ -94,7 +97,7 @@ class Sheets:
         """
         return (self[id] for id, _ in backend.iterfiles(self._drive))
 
-    def __contains__(self, id):
+    def __contains__(self, id) -> bool:
         """Return if there is a spreadsheet with the given id.
 
         Args:
@@ -174,7 +177,7 @@ class Sheets:
         files = backend.iterfiles(self._drive, name=title)
         return [self[id] for id, _ in files]
 
-    def iterfiles(self):
+    def iterfiles(self) -> Iterator[tuple[str, str]]:
         """Yield ``(id, title)`` pairs for all available spreadsheets.
 
         Yields:
@@ -182,7 +185,7 @@ class Sheets:
         """
         return backend.iterfiles(self._drive)
 
-    def ids(self):
+    def ids(self) -> list[str]:
         """Return a list of all available spreadsheet ids.
 
         Returns:
@@ -190,7 +193,7 @@ class Sheets:
         """
         return [id for id, _ in self.iterfiles()]
 
-    def titles(self, unique=False):
+    def titles(self, unique=False) -> list[str]:
         """Return a list of all available spreadsheet titles.
 
         Args:

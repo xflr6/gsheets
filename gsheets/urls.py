@@ -25,7 +25,7 @@ class SheetUrl:
         id = ma.group('id')
         return cls(id)
 
-    def __init__(self, id, gid=0):
+    def __init__(self, id, gid: int = 0) -> None:
         """
 
         >>> SheetUrl('spam').id
@@ -37,10 +37,10 @@ class SheetUrl:
         self.id = id
         self.gid = gid
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'<{self.__class__.__name__} id={self.id!r} gid={self.gid:d}>'
 
-    def to_string(self, gid=None):
+    def to_string(self, gid: int | None = None) -> str:
         """
 
         >>> SheetUrl('spam').to_string()
@@ -56,7 +56,7 @@ class SheetUrl:
     __str__ = to_string
 
     @property
-    def short_id(self):
+    def short_id(self) -> str:
         """
 
         >>> SheetUrl('1234567890').short_id

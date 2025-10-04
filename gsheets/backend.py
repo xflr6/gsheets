@@ -1,5 +1,6 @@
 """Thin wrappers around google-api-client-python talking to sheets/drive API."""
 
+from collections.abc import Iterator
 import re
 
 import apiclient
@@ -39,7 +40,10 @@ def build_service(name=None, **kwargs):
     return apiclient.discovery.build(**kwargs)
 
 
-def iterfiles(service, *, name=None, mimeType=SHEET, order=FILEORDER):  # noqa: N803
+def iterfiles(service, *,
+              name=None,
+              mimeType=SHEET,
+              order=FILEORDER) -> Iterator[tuple[str, str]]:  # noqa: N803
     """Fetch and yield ``(id, name)`` pairs for Google drive files."""
     params = {'orderBy': order, 'pageToken': None}
     q = []
