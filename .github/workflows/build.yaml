@@ -9,23 +9,32 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - python-version: "3.14"
+          - name: linux-3.14-typecheck
+            python-version: "3.14"
             os: ubuntu-latest
-          - python-version: "3.14"
+          - name: windows-3.14
+            python-version: "3.14"
             os: windows-latest
-          - python-version: "3.14"
+          - name: macos-3.14
+            python-version: "3.14"
             os: macos-latest
-          - python-version: "3.13"
+          - name: linux-3.13
+            python-version: "3.13"
             os: ubuntu-latest
-          - python-version: "3.12"
+          - name: linux-3.12
+            python-version: "3.12"
             os: ubuntu-latest
-          - python-version: "3.11"
+          - name: linux-3.11
+            python-version: "3.11"
             os: ubuntu-latest
-          - python-version: "3.10"
+          - name: linux-3.10
+            python-version: "3.10"
             os: ubuntu-latest
-          - python-version: pypy-3.11
+          - name: linux-pypy-3.11
+            python-version: pypy-3.11
             os: ubuntu-latest
-          - python-version: pypy-3.10
+          - name: linux-pypy-3.10
+            python-version: pypy-3.10
             os: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -39,11 +48,20 @@ jobs:
           echo "::group::Run python -m pip install --upgrade pip setuptools wheel"
           python -m pip install --upgrade pip setuptools wheel
           echo "::endgroup::"
-          echo "::group::Run pip install .[test]"
-          pip install .[test]
+          echo "::group::Run pip install .[test] mypy"
+          pip install .[test] mypy
           echo "::endgroup::"
       - name: Run tests
         run: python run-tests.py
+      - name: Run mypy (if -typecheck)
+        if: ${{ contains(matrix.name, '-typecheck') }}
+        run: |
+          echo "::group::Run mypy"
+          FAILED=0
+          python -m mypy || FAILED=$?
+          echo "::endgroup::"
+          [ $FAILED -eq 0 ] || echo "::warning::mypy failed with exit code $FAILED"
+        shell: bash
       - name: Upload coverage
         uses: codecov/codecov-action@v4
         env:
