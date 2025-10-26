@@ -8,7 +8,7 @@ import apiclient
 __all__ = ['build_service',
            'iterfiles',
            'spreadsheet',
-           'values'
+           'values',
            'quote']
 
 SERVICES = {'sheets': {'serviceName': 'sheets', 'version': 'v4'},
