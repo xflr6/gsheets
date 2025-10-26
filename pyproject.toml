@@ -46,7 +46,7 @@ platforms = ["any"]
 version = { attr = "gsheets.__version__" }
 
 [dependency-groups]
-dev = [  # $ pip install . --group dev
+dev = [  # $ pip install -e . --group dev
   "build",
   "tox",
   "twine",
