@@ -2,16 +2,13 @@
 name = "gsheets"
 authors = [{ name = "Sebastian Bank", email = "sebastian.bank@uni-leipzig.de" }]
 description = "Pythonic wrapper for the Google Sheets API"
-keywords = ["spreadhseets", "google", "api",  "v4", "wrapper", "csv", "pandas"]
+keywords = ["spreadhseets", "google", "api", "v4", "wrapper", "csv", "pandas"]
 readme = "README.rst"
 license = "MIT"
 license-files = ["LICENSE.txt"]
 dynamic = ["version"]
 requires-python = ">=3.10"
-dependencies = [
-  "google-api-python-client",
-  "oauth2client>=1.5.0",
-]
+dependencies = ["google-api-python-client", "oauth2client>=1.5.0"]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",
@@ -47,45 +44,27 @@ version = { attr = "gsheets.__version__" }
 
 [dependency-groups]
 dev = [  # $ pip install -e . --group dev
-  "build",
-  "tox",
-  "twine",
-  "wheel",
+  "build", "tox", "twine", "wheel",
   { include-group = "docs" },
   { include-group = "lint" },
   { include-group = "test" },
   { include-group = "typing" },
 ]
-docs = [
-  "sphinx",
-  "sphinx-rtd-theme"
-]
-lint = [
-  "flake8",
-  "Flake8-pyproject",
-  "pep8-naming",
-]
-test = [
-  "coverage",
-  "mock>=4",
-  "pytest>=7",
-  "pytest-cov",
-  "pytest-mock>=3",
-]
-typing = [
-  "mypy",
-]
+docs = ["sphinx", "sphinx-rtd-theme"]
+lint = ["flake8", "Flake8-pyproject", "pep8-naming"]
+test = ["coverage", "mock>=4", "pytest>=8", "pytest-cov", "pytest-mock>=3"]
+typing = ["mypy"]
 
 [tool.mypy]
 packages = ["gsheets"]
 
 [tool.flake8]
-exclude = ["docs", ".tox"]
+exclude = [".tox", "build", "docs"]
 ignore = ["E126", "E128", "W503"]
 max-line-length = 100
 
 [tool.pytest.ini_options]
-minversion = "6"
+minversion = "8"
 testpaths = ["gsheets", "tests"]
 addopts = [
   "--doctest-modules",
