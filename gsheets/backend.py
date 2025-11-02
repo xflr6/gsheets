@@ -42,8 +42,8 @@ def build_service(name=None, **kwargs):
 
 def iterfiles(service, *,
               name=None,
-              mimeType=SHEET,
-              order=FILEORDER) -> Iterator[tuple[str, str]]:  # noqa: N803
+              mimeType=SHEET,  # noqa: N803
+              order=FILEORDER) -> Iterator[tuple[str, str]]:
     """Fetch and yield ``(id, name)`` pairs for Google drive files."""
     params = {'orderBy': order, 'pageToken': None}
     q = []
