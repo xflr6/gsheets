@@ -2,8 +2,6 @@
 
 """Investigate API limits with larger sheets."""
 
-from __future__ import print_function
-
 import logging
 
 from gsheets import Sheets
