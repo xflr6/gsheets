@@ -9,8 +9,6 @@ import sys
 
 import pytest
 
-SELF = pathlib.Path(__file__)
-
 ARGS = [#'--collect-only',
         #'--verbose',
         #'--pdb',
@@ -22,8 +20,12 @@ if platform.system() == 'Windows' and 'idlelib' in sys.modules:
     ARGS += ['-p', 'no:faulthandler']
 
 
-print('run', [SELF.name] + sys.argv[1:])
+print('run', [pathlib.Path(__file__).name] + sys.argv[1:])
 args = ARGS + sys.argv[1:]
 
+# https://docs.pytest.org/en/stable/reference/reference.html#pytest-main
 print(f'pytest.main({args!r})')
-sys.exit(pytest.main(args))
+if (returncode := pytest.main(args)):
+    print('FAILED:', returncode)
+    sys.exit(returncode)
+print('PASSED.')
