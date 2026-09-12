@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # flake8: noqa
 
-""""Import ``gsheets`` here and try example code w/ logging."""
+"""Import ``gsheets`` here and try example code w/ logging."""
 
 import logging
 
