@@ -21,6 +21,8 @@ FILEORDER = 'folder,name,createdTime'
 IS_ALPHANUMERIC_A1 = re.compile(r'[a-zA-Z]{1,3}'  # last column 'ZZZ' (18_278)
                                 r'\d{1,}').fullmatch
 
+IS_SAFE_UNQUOTED = re.compile(r'\w+').fullmatch  # letters/digits/underscore only
+
 
 def build_service(name=None, **kwargs):
     """Return a service endpoint for interacting with a Google API."""
@@ -93,16 +95,21 @@ def values(service, id, ranges):
 def quote(worksheet_name: str) -> str:
     """Return ``worksheet_name``, single-quote if needed.
 
+    Sheet names must be single-quoted in A1-notation ranges if they contain
+    spaces or other special (non-word) characters, or if they would
+    otherwise be ambiguous with a cell/range reference (e.g. ``'DKC3'``).
+
+    see https://developers.google.com/sheets/api/guides/concepts#expandable-1
+
     >>> quote('spam')
     'spam'
 
     >>> quote('spam spam')
-    'spam spam'
+    "'spam spam'"
 
     >>> quote('DKC3')
     "'DKC3'"
     """
-    if IS_ALPHANUMERIC_A1(worksheet_name):
-        # https://developers.google.com/sheets/api/guides/concepts#expandable-1
-        return f"'{worksheet_name}'"
-    return worksheet_name
+    if IS_SAFE_UNQUOTED(worksheet_name) and not IS_ALPHANUMERIC_A1(worksheet_name):
+        return worksheet_name
+    return f"'{worksheet_name}'"

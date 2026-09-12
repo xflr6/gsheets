@@ -3,6 +3,21 @@ import pytest
 from gsheets import backend
 
 
+@pytest.mark.parametrize(('name', 'expected'), [
+    ('spam', 'spam'),
+    ('Tabellenblatt2', 'Tabellenblatt2'),
+    ('2024', '2024'),
+    ('a_b', 'a_b'),
+    ('DKC3', "'DKC3'"),
+    ('spam spam', "'spam spam'"),
+    ('Sheet 1', "'Sheet 1'"),
+    ('Q1 Report', "'Q1 Report'"),
+    ('Sales!', "'Sales!'"),
+])
+def test_quote(name, expected):
+    assert backend.quote(name) == expected
+
+
 def test_build_service(mocker, serviceName='spam', version='v1'):  # noqa: N803
     build = mocker.patch('apiclient.discovery.build', autospec=True)
 
