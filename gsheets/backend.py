@@ -21,6 +21,8 @@ FILEORDER = 'folder,name,createdTime'
 IS_ALPHANUMERIC_A1 = re.compile(r'[a-zA-Z]{1,3}'  # last column 'ZZZ' (18_278)
                                 r'\d{1,}').fullmatch
 
+IS_SAFE_UNQUOTED = re.compile(r'(?a)\w+').fullmatch  # ASCII letters/digits/underscore only
+
 
 def build_service(name=None, **kwargs):
     """Return a service endpoint for interacting with a Google API."""
@@ -93,16 +95,34 @@ def values(service, id, ranges):
 def quote(worksheet_name: str) -> str:
     """Return ``worksheet_name``, single-quote if needed.
 
+    Sheet names must be single-quoted in A1-notation ranges if they contain
+    spaces, non-ASCII characters, or other special (non-word) characters, or
+    if they would otherwise be ambiguous with a cell/range reference (e.g.
+    ``'DKC3'``). A literal single quote inside a quoted name is escaped by
+    doubling it, confirmed against a live Google Sheet (a name containing a
+    literal ``'`` and a name in a non-Latin script were both quoted by
+    Sheets' own formula-reference builder; the doubled-quote and ASCII-only
+    behavior are not documented, and the docs' own example
+    (``'Jon's_Data'!A1:D5``) is itself inconsistently escaped).
+
+    see https://developers.google.com/sheets/api/guides/concepts#expandable-1
+
     >>> quote('spam')
     'spam'
 
     >>> quote('spam spam')
-    'spam spam'
+    "'spam spam'"
 
     >>> quote('DKC3')
     "'DKC3'"
+
+    >>> quote("Jon's Data")
+    "'Jon''s Data'"
+
+    >>> quote('日本語')
+    "'日本語'"
     """
-    if IS_ALPHANUMERIC_A1(worksheet_name):
-        # https://developers.google.com/sheets/api/guides/concepts#expandable-1
-        return f"'{worksheet_name}'"
-    return worksheet_name
+    if IS_SAFE_UNQUOTED(worksheet_name) and not IS_ALPHANUMERIC_A1(worksheet_name):
+        return worksheet_name
+    escaped = worksheet_name.replace("'", "''")
+    return f"'{escaped}'"
